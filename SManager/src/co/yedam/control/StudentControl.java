@@ -28,10 +28,10 @@ public class StudentControl {
 				addStudent();
 				break;
 			case 3:
-				
+				updateStudent();
 				break;
 			case 4:
-				
+				removeStudent();
 				break;
 			case 5:
 				System.out.println("종료합니다.");
@@ -72,6 +72,43 @@ public class StudentControl {
 		std.setBirthDate(birthDate);
 		if(sdao.insertStudent(std)) {
 			System.out.println("저장완료!");
+		} else {
+			System.out.println("처리중 예외발생!");
+		}
+	}
+
+	// 등록 기능
+	void updateStudent() {
+		System.out.print("학생번호 입력 > ");
+		String stdNo = scan.nextLine();
+		System.out.print("새로운 학생이름 입력 > ");
+		String stdName = scan.nextLine();
+		System.out.print("새로운 연락처 입력 > ");
+		String stdPhone = scan.nextLine();
+		System.out.print("새로운주소 입력 > ");
+		String addresss = scan.nextLine();
+		System.out.print("새로운 생일 입력 > ");
+		String birthDate = scan.nextLine();
+		
+		StudentVO std = new StudentVO();
+		std.setStdNo(stdNo);
+		std.setStdName(stdName);
+		std.setStdPhone(stdPhone);
+		std.setAddress(addresss);
+		std.setBirthDate(birthDate);
+		if(sdao.modifyStudent(std)) {
+			System.out.println("수정완료!");
+		} else {
+			System.out.println("처리중 예외발생!");
+		}
+	}
+	// 삭제기능
+	void removeStudent(){
+		System.out.print("학생번호 입력 > ");
+		String stdNo = scan.nextLine();
+
+		if(sdao.deleteStudent(stdNo)) {
+			System.out.println("삭제완료!");
 		} else {
 			System.out.println("처리중 예외발생!");
 		}
