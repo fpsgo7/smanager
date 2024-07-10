@@ -28,7 +28,7 @@ public class StudentControl {
 				addStudent();
 				break;
 			case 3:
-				updateStudent();
+				modifyStudent();
 				break;
 			case 4:
 				removeStudent();
@@ -50,7 +50,7 @@ public class StudentControl {
 			System.out.println(studentVO.briefShow());
 		}
 	}
-	
+
 	// 등록 기능
 	void addStudent() {
 		System.out.print("학생번호 입력 > ");
@@ -77,25 +77,35 @@ public class StudentControl {
 		}
 	}
 
-	// 등록 기능
-	void updateStudent() {
-		System.out.print("학생번호 입력 > ");
-		String stdNo = scan.nextLine();
-		System.out.print("새로운 학생이름 입력 > ");
+	// 수정 기능
+	void modifyStudent() {
+		int count =0;
+		String stdNo = null;
+		while(true) {
+			System.out.print("변경할 학생번호 > ");
+			stdNo = scan.nextLine();
+			if(sdao.selectStudentByNo(stdNo) == 1) {
+				break;
+			}
+			System.out.println("학생번호에 대한 학생정보가 없습니다.");
+			count ++;
+			if(count >3) {
+				return;
+			}
+		}
+		
+		System.out.print("변경할 학생이름 > ");
 		String stdName = scan.nextLine();
-		System.out.print("새로운 연락처 입력 > ");
+		System.out.print("변경할 연락처 > ");
 		String stdPhone = scan.nextLine();
-		System.out.print("새로운주소 입력 > ");
+		System.out.print("변경할 주소 > ");
 		String addresss = scan.nextLine();
-		System.out.print("새로운 생일 입력 > ");
-		String birthDate = scan.nextLine();
 		
 		StudentVO std = new StudentVO();
 		std.setStdNo(stdNo);
 		std.setStdName(stdName);
 		std.setStdPhone(stdPhone);
 		std.setAddress(addresss);
-		std.setBirthDate(birthDate);
 		if(sdao.modifyStudent(std)) {
 			System.out.println("수정완료!");
 		} else {

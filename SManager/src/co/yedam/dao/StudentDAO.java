@@ -74,11 +74,11 @@ public class StudentDAO extends DAO{
 	public boolean modifyStudent(StudentVO studentVO) {
 		
 		String sql ="UPDATE tbl_student SET"
-			+ " std_name = NVL('?',std_name),"
-			+ " std_phone = NVL('?',std_phone),"
-			+ " address = NVL('?',address),"
-			+ " birth_date =  NVL('?',birth_date)"
-			+ " WHERE std_no = '?'";
+			+ " std_name = NVL(?,std_name),"
+			+ " std_phone = NVL(?,std_phone),"
+			+ " address = NVL(?,address)"
+//			+ " birth_date =  NVL(?,birth_date)"
+			+ " WHERE std_no = ?";
 		
 		conn = getConn();
 		try {
@@ -86,8 +86,8 @@ public class StudentDAO extends DAO{
 			pstmt.setString(1, studentVO.getStdName());
 			pstmt.setString(2, studentVO.getStdPhone());
 			pstmt.setString(3, studentVO.getAddress());
-			pstmt.setString(4, studentVO.getBirthDate());
-			pstmt.setString(5, studentVO.getStdNo());
+//			pstmt.setString(4, studentVO.getBirthDate());
+			pstmt.setString(4, studentVO.getStdNo());
 			int r = pstmt.executeUpdate();
 			if(r == 1) {
 				return true;
@@ -121,5 +121,27 @@ public class StudentDAO extends DAO{
 		}
 		
 		return false;
+	}
+
+	// 학생번호로 학생 조회
+	public int selectStudentByNo(String stdNo) {
+		
+		String sql = "select count(1) from tbl_student"
+				+ " where std_no= ?";
+		conn = getConn();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, stdNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {		
+				return rs.getInt(1);
+			} 
+			return 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 }
