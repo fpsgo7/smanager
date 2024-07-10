@@ -23,7 +23,7 @@ public class DAO {
 		String user = "jsp";// 유저아이디
 		String pass = "jsp";// 유저 비번
 		try {
-			Class.forName(driver);
+			Class.forName(driver);// 드라이버가 있는지 확인한다.
 			conn = DriverManager.getConnection(url,user,pass);
 		} catch (SQLException e) {
 			e.printStackTrace();

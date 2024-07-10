@@ -114,9 +114,21 @@ public class StudentControl {
 	}
 	// 삭제기능
 	void removeStudent(){
-		System.out.print("학생번호 입력 > ");
-		String stdNo = scan.nextLine();
-
+		int count = 0;
+		String stdNo = null;
+		while(true) {
+			System.out.print("삭제할 학생번호 > ");
+			stdNo = scan.nextLine();
+			if(sdao.selectStudentByNo(stdNo) == 1) {
+				break;
+			}
+			System.out.println("해당학생은 없습니다.");
+			count ++;
+			if(count >3) {
+				return;
+			}
+		}
+		
 		if(sdao.deleteStudent(stdNo)) {
 			System.out.println("삭제완료!");
 		} else {
