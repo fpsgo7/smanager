@@ -1,7 +1,5 @@
 package co.park.dao;
 
-import java.sql.SQLException;
-
 import co.park.vo.MemberVO;
 
 public class MemberDAO extends DAO{

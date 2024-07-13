@@ -6,10 +6,12 @@ import co.park.dao.MemberDAO;
 import co.park.dao.RestaurantDAO;
 import co.park.dao.ReviewDAO;
 import co.park.info.MemberStatic;
+import co.park.info.ScannerStatic;
 
 public class RestaurnatReviewControl {
 	Scanner scan = new Scanner(System.in);
 	MemberControl memberControl = new MemberControl();
+	RestaurantControl restaurantControl = new RestaurantControl();
 	MemberDAO  memberDAO = new MemberDAO();
 	RestaurantDAO restaurantDAO = new RestaurantDAO();
 	ReviewDAO reviewDAO = new ReviewDAO();
@@ -17,50 +19,45 @@ public class RestaurnatReviewControl {
 	int choice = 0;
 	
 	public void main() {
-		boolean run  = true;
-		while(run) {
+		while(true) {
 			mainPrint();
-			try {
-				int choice = Integer.parseInt(scan.nextLine());
-				switch (choice) {
-				case 1:  
-					memberControl.login();// true false 반환 완료
-					if(MemberStatic.getGrade() == 0) {
-						// 관리자 화면 실행
-					}else {
-						// 일반 회원 화면 실행
-						
-					}
-					break;
-				case 2:
-					memberControl.join();// 회원 가입 작성완료
-					break;
-				case 3:
-					InstructionForUse();// 작성 완료
-					break;
-				case 4:
-					// 작업전 (기본적인거 완료후 추가작업때 하자)
-					memberControl.autoLogin();
-					break;
-				case 5:
-					run = exit();// 종료 기능
-					break;
-				default:
-					System.out.println("잘못된 입력입니다 다시입력해 주십시요.");
+			int choice = ScannerStatic.mustInt(scan.nextLine()); 
+			
+			switch (choice) {
+			case 1:  
+				if(memberControl.login()) {
+					loginSuccess(MemberStatic.getGrade());
 				}
-			} catch (NumberFormatException e) {
-				System.out.println("숫자만 사용가능합니다. \n다시입력해 주십시요.");
+				break;
+			case 2:
+				memberControl.join();// 회원 가입 작성완료
+				break;
+			case 3:
+				InstructionForUse();// 작성 완료
+				break;
+			case 4:
+				// 작업전 (기본적인거 완료후 추가작업때 하자)
+				memberControl.autoLogin();
+				break;
+			case 5:
+				System.out.println("종료합니다.");
+				return;
+			default:
+				System.out.println("잘못된 입력입니다 다시입력해 주십시요.");
 			}
 		}
 	}
-	private boolean exit() {
-		System.out.println("종료합니다.");
-		return false;
-	}
-	private void autoLogin() {
-		// TODO Auto-generated method stub
+	private void loginSuccess(int grade) {
+		if(grade == 0) {
+			// 관리자
+			restaurantControl.restaurantMenu();
+		}else {
+			restaurantControl.restaurantList();
+		}
 		
 	}
+
+
 	/**
 	 * 주의 사항을 알려주는 출력 메서드이다.
 	 */

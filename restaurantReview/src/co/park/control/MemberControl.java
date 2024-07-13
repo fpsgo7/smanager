@@ -5,6 +5,7 @@ import java.util.Scanner;
 import co.park.dao.MemberDAO;
 import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
+import co.park.info.ScannerStatic;
 import co.park.vo.MemberVO;
 
 public class MemberControl {
@@ -23,7 +24,11 @@ public class MemberControl {
 		System.out.println("------------------------------------------------");
 		System.out.print("아이디를 입력해주십시요 > ");
 		while(true) {
-			id = scan.nextLine();
+			id = ScannerStatic.rightString(scan.nextLine());
+			if(id == null) {
+				System.out.print("잘못된 입력 입니다 다시 입력해주십시요. >");
+				continue;
+			}
 			if(id.equals("0")) {
 				System.out.println("회원 가입을 취소합니다.");
 				return;
@@ -36,14 +41,18 @@ public class MemberControl {
 				System.out.println("사용가능한 아이디 입니다.");
 				break;
 			} catch (Exception e) {
-				PrintErrStatic.errPrint(e);
+				PrintErrStatic.serverErrorPrint(e);
 				System.out.print("서버에 문제가 발생하였습니다 다시입력해주십시요. >");
 			}
 		}
 		System.out.print("비밀번호를 입력해주세요> ");
 		while(true) {
-			password = scan.nextLine();
-			if(id.equals("0")) {
+			password = ScannerStatic.rightString(scan.nextLine());
+			if(password == null) {
+				System.out.print("잘못된 입력 입니다 다시 입력해주십시요. >");
+				continue;
+			}
+			if(password.equals("0")) {
 				System.out.println("회원 가입을 취소합니다.");
 				return;
 			}
@@ -55,7 +64,7 @@ public class MemberControl {
 				System.out.print("회원 가입이 실패하였습니다\n"
 						+ " 다시 입력해 주십시요 > ");
 			}catch (Exception e) {
-				PrintErrStatic.errPrint(e);
+				PrintErrStatic.serverErrorPrint(e);
 				System.out.print("서버 오류가 발생하였습니다\n"
 						+ " 다시 입력해 주십시요 >");
 			}
@@ -66,10 +75,13 @@ public class MemberControl {
 		String password;
 		System.out.println("=================================");
 		System.out.print("아이디를 입력해주세요 > ");
-		id = scan.nextLine();
+		id = ScannerStatic.rightString(scan.nextLine());
 		System.out.print("비밀번호를 입력해주세요> ");
-		password = scan.nextLine();
-		
+		password = ScannerStatic.rightString(scan.nextLine());
+		if(id == null || password == null) {
+			System.out.println("잘못된 값을 입력하셧습니다.");
+			return false;
+		}
 		try {
 			MemberVO vo = memberDAO.login(id, password);
 			// 로그인 실패시
@@ -82,7 +94,7 @@ public class MemberControl {
 			System.out.println(MemberStatic.getId()+"님 환영합니다.");
 			return true;
 		} catch (Exception e) {
-			PrintErrStatic.errPrint(e);
+			PrintErrStatic.serverErrorPrint(e);
 			System.out.println("서버 오류가 발생하였습니다.");
 			return false;
 		}
