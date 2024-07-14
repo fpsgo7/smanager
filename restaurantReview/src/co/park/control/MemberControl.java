@@ -9,7 +9,7 @@ import co.park.info.ScannerStatic;
 import co.park.vo.MemberVO;
 
 public class MemberControl {
-	private MemberDAO memberDAO = new MemberDAO();
+	private MemberDAO dao = new MemberDAO();
 	private Scanner scan = new Scanner(System.in);
 	
 	public void join() {
@@ -34,7 +34,7 @@ public class MemberControl {
 				return;
 			}
 			try {
-				if(memberDAO.idCheck(id)) {
+				if(dao.idCheck(id)) {
 					System.out.print("중복된 아이디 입니다 다시입력해주십시요. > ");
 					continue;
 				}
@@ -57,7 +57,7 @@ public class MemberControl {
 				return;
 			}
 			try {
-				if(memberDAO.join(id, password)) {
+				if(dao.join(id, password)) {
 					System.out.println("회원 가입이 완료되었습니다.");
 					return;
 				}
@@ -83,7 +83,7 @@ public class MemberControl {
 			return false;
 		}
 		try {
-			MemberVO vo = memberDAO.login(id, password);
+			MemberVO vo = dao.login(id, password);
 			// 로그인 실패시
 			if(vo == null) {
 				System.out.println("아이디 또는 비밀번호가 틀렸습니다.");

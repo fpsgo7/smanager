@@ -54,6 +54,37 @@ public class ReviewDAO extends DAO{
 		return list;
 	}
 	
+	public List<ReviewVO> getReviewsByRestaurant(int restaurantId , String memberId ) throws Exception{
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		String sql = "SELECT id, member_id ,restaurant_id, "
+				+ " menu,"
+				+ " point,"
+				+ " review_content,"
+				+ " place_full,"
+				+ " lastest_date"
+				+ " FROM review"
+				+ " WHERE restaurant_id = ? "
+				+ " AND member_id = ?";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setLong(1 , restaurantId);
+		pstmt.setString(2 , memberId);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			ReviewVO vo = new ReviewVO();
+			vo.setId(rs.getInt("id"));
+			vo.setMemberId(rs.getString("member_id"));
+			vo.setRestaurantId(rs.getInt("restaurant_id"));
+			vo.setMenu(rs.getString("menu"));
+			vo.setPoint(rs.getInt("point"));
+			vo.setReviewContent(rs.getString("review_content"));
+			vo.setPlaceFull(rs.getString("place_full"));
+			vo.setLastestDate(rs.getString("lastest_date"));
+			list.add(vo);
+		}
+		return list;
+	}
+	
 	public boolean insertReview(ReviewVO vo) throws Exception{
 		
 		String sql = "INSERT INTO review ( id, "
@@ -97,6 +128,18 @@ public class ReviewDAO extends DAO{
 		pstmt.setString(4, vo.getReviewContent());
 		pstmt.setString(5, vo.getPlaceFull());
 		pstmt.setLong(6, vo.getId());
+		if(pstmt.executeUpdate() == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean deleteReview(int id) throws Exception{
+		String sql = "DELETE review"
+				+ " WHERE id = ?";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setLong(1, id);
 		if(pstmt.executeUpdate() == 1) {
 			return true;
 		}

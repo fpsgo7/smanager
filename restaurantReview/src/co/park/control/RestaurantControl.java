@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import co.park.dao.RestaurantDAO;
+import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
 import co.park.info.ScannerStatic;
 import co.park.vo.RestaurantVO;
 
 public class RestaurantControl {
-	private RestaurantDAO restaurantDAO = new RestaurantDAO();
+	private ReviewControl reviewControl = new ReviewControl();
+	private RestaurantDAO dao = new RestaurantDAO();
 	private Scanner scan = new Scanner(System.in);
+	/**
+	 * 식당 기능 메슈 (관리자 전용)
+	 */
 	public void restaurantMenu() {
 		while(true) {
 			restaurantMenuPrint();
@@ -39,42 +44,52 @@ public class RestaurantControl {
 	public void restaurantList() {
 		List<RestaurantVO> list = null;
 		int choose; 
-		try {
-			System.out.println("===================================================================");
-			System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
-			System.out.println("-------------------------------------------------------------------");
-			list = restaurantDAO.getRestaurants();
-			for (RestaurantVO vo : list) {
-				System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
-						vo.getId(), vo.getName(), 
-						vo.getLowestPrice(), vo.getHighestPrice(), 
-						vo.getDurationOfTime(), vo.getLastestDate());
-			}
-			System.out.println("0 번을 눌러 되돌아가거나 식당의 번호를 입력하여 리뷰를 볼수있습니다.");
-			while(true) {
-				System.out.print("번호 입력 > ");
-				choose = ScannerStatic.mustInt(scan.nextLine()); 
-				if(choose == 0) {
-					System.out.println("처음화면으로 돌아갑니다.");
-					return;
-				}else if(!findRestaurantId(choose,list)){
-					System.out.println("잘못된 입력입니다 다시 입력해주시길 바랍니다.");
-				}else {
-					// 해당 식당의 리뷰 선택 목록으로 이동
+		while(true) {
+			try {
+				System.out.println("===================================================================");
+				System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
+				System.out.println("-------------------------------------------------------------------");
+				list = dao.getRestaurants();
+				for (RestaurantVO vo : list) {
+					System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
+							vo.getId(), vo.getName(), 
+							vo.getLowestPrice(), vo.getHighestPrice(), 
+							vo.getDurationOfTime(), vo.getLastestDate());
 				}
+				System.out.println("0 번을 눌러 되돌아가거나 식당의 번호를 입력하여 리뷰를 볼수있습니다.");
+				while(true) {
+					System.out.print("번호 입력 > ");
+					choose = ScannerStatic.mustInt(scan.nextLine()); 
+					if(choose == 0) {
+						System.out.println("처음화면으로 돌아갑니다.");
+						return;
+					}
+					RestaurantVO vo = findRestaurantId(choose,list);
+					if(vo == null){
+						System.out.println("잘못된 입력입니다 다시 입력해주시길 바랍니다.");
+					}else {
+						// 해당 식당의 리류로 이동
+						if(MemberStatic.getGrade() == 0 ) {
+							reviewControl.reviewMenuByManager(vo);
+						}else {
+							reviewControl.reviewMenu(vo);
+						}
+						break;
+					}
+				}
+			}catch (Exception e) {
+				PrintErrStatic.serverErrorPrint(e);
+				System.out.println("서버 오류로 이전화면으로 돌아가겠습니다.");
 			}
-		}catch (Exception e) {
-			PrintErrStatic.serverErrorPrint(e);
-			System.out.println("서버 오류로 이전화면으로 돌아가겠습니다.");
 		}
 	}
-	public boolean findRestaurantId(int choose, List<RestaurantVO> list) {
+	public RestaurantVO findRestaurantId(int choose, List<RestaurantVO> list) {
 		for (RestaurantVO vo : list) {
 			if(vo.getId() == choose) {
-				return true;
+				return vo;
 			}
 		}
-		return false;
+		return null;
 	}
 	public void deleteRestaurant() {
 		List<RestaurantVO> list = null;
@@ -83,7 +98,7 @@ public class RestaurantControl {
 			System.out.println("===================================================================");
 			System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
 			System.out.println("-------------------------------------------------------------------");
-			list = restaurantDAO.getRestaurants();
+			list = dao.getRestaurants();
 			for (RestaurantVO vo : list) {
 				System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
 						vo.getId(), vo.getName(), 
@@ -91,7 +106,7 @@ public class RestaurantControl {
 						vo.getDurationOfTime(), vo.getLastestDate());
 			}
 			System.out.println("-------------------------------------------------------------------");
-			System.out.println(" 0번을 눌러 수정을 취소하거나 \n"
+			System.out.println(" 0번을 눌러 삭제를 취소하거나 \n"
 					+ "식당정보중 삭제하고자 하는 정보의 번호를 입력해주세요");
 			
 			while(true) {
@@ -101,9 +116,9 @@ public class RestaurantControl {
 					System.out.println("식당 수정을 나갑니다. ");
 					return;
 				}
-				for (RestaurantVO restaurantVO : list) {
-					if(restaurantVO.getId() == choose) {
-						restaurantDAO.deleteRestaurant(choose);
+				for (RestaurantVO vo : list) {
+					if(vo.getId() == choose) {
+						dao.deleteRestaurant(choose);
 						System.out.println("식당 삭제가 완료 되었습니다.");
 						return;
 					}
@@ -123,7 +138,7 @@ public class RestaurantControl {
 			System.out.println("===================================================================");
 			System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
 			System.out.println("-------------------------------------------------------------------");
-			list = restaurantDAO.getRestaurants();
+			list = dao.getRestaurants();
 			for (RestaurantVO vo : list) {
 				System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
 						vo.getId(), vo.getName(), 
@@ -141,8 +156,8 @@ public class RestaurantControl {
 					System.out.println("식당 수정을 나갑니다. ");
 					return;
 				}
-				for (RestaurantVO restaurantVO : list) {
-					if(restaurantVO.getId() == choose) {
+				for (RestaurantVO vo : list) {
+					if(vo.getId() == choose) {
 						while(true) {
 							System.out.print("식당이름은 무었이에요 > ");
 							String name = ScannerStatic.rightString(scan.nextLine());
@@ -155,11 +170,11 @@ public class RestaurantControl {
 
 							System.out.print("학원 기준으로 이동시간은 어느정도 인가요 > ");
 							int durationTime = ScannerStatic.mustInt(scan.nextLine());
-							restaurantVO.setName(name);
-							restaurantVO.setLowestPrice(lowPrice);
-							restaurantVO.setHighestPrice(highPrice);
-							restaurantVO.setDurationOfTime(durationTime);
-							restaurantDAO.updateRestaurant(restaurantVO);
+							vo.setName(name);
+							vo.setLowestPrice(lowPrice);
+							vo.setHighestPrice(highPrice);
+							vo.setDurationOfTime(durationTime);
+							dao.updateRestaurant(vo);
 							System.out.println("식당 수정이 완료 되었습니다.");
 							return;
 						}
@@ -201,7 +216,7 @@ public class RestaurantControl {
 		vo.setHighestPrice(highPrice);
 		vo.setDurationOfTime(durationTime);
 		try {
-			if(restaurantDAO.insertRestaurant(vo)) {
+			if(dao.insertRestaurant(vo)) {
 				System.out.println("추가 작업이 성공하였습니다.");
 			}else {
 				System.out.println("추가 작업이 실패하였습니다.");
