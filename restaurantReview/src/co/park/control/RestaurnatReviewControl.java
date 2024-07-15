@@ -21,7 +21,7 @@ public class RestaurnatReviewControl {
 	public void main() {
 		while(true) {
 			mainPrint();
-			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
 			if(MemberStatic.getId() == null) {
 				switch (choice) {
 				case 1:  
@@ -56,9 +56,16 @@ public class RestaurnatReviewControl {
 					InstructionForUse();// 회원 가입 작성완료
 					break;
 				case 3:
-					System.out.println("자동 로그인 등록");
+					if(MemberStatic.getGrade() == 0) {
+						restaurantControl.restaurantMenu();
+					}else {
+						restaurantControl.restaurantList();
+					}
 					break;
 				case 4:
+					System.out.println("자동 로그인 등록");
+					break;
+				case 5:
 					System.out.println("종료합니다.");
 					return;
 				default:
@@ -119,9 +126,14 @@ public class RestaurnatReviewControl {
 			System.out.println("  안녕하십니까 "+MemberStatic.getId()+ "님");
 			System.out.println("=================================");
 			System.out.println("1. 로그아웃");
-			System.out.println("2. 사용안네(처음 이용하시면 읽어주세요)");
-			System.out.println("3. 자동 로그인 등록");
-			System.out.println("4. 종료");
+			System.out.println("2. 사용안네");
+			if(MemberStatic.getGrade() == 0) {
+				System.out.println("3. 다시 식당메뉴로 ");
+			}else {
+				System.out.println("3. 다시 식당리스트로 ");
+			}
+			System.out.println("4. 자동 로그인 등록");
+			System.out.println("5. 종료");
 			System.out.print("입력 > ");
 		}
 	}

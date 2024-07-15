@@ -20,7 +20,8 @@ public class RestaurantControl {
 	public void restaurantMenu() {
 		while(true) {
 			restaurantMenuPrint();
-			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
+			System.out.print("입력 > ");
+			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
 			switch (choice) {
 			case 1:  
 				addRestaurant();
@@ -60,7 +61,7 @@ public class RestaurantControl {
 				System.out.println("0 번을 눌러 되돌아가거나 식당의 번호를 입력하여 리뷰를 볼수있습니다.");
 				while(true) {
 					System.out.print("번호 입력 > ");
-					choose = ScannerStatic.mustNaturalNum(scan.nextLine()); 
+					choose = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
 					if(choose == 0) {
 						System.out.println("처음화면으로 돌아갑니다.");
 						return;
@@ -112,7 +113,7 @@ public class RestaurantControl {
 			
 			while(true) {
 				System.out.print("입력> ");
-				choose = ScannerStatic.mustNaturalNum(scan.nextLine());
+				choose = ScannerStatic.mustNaturalNumOr0(scan.nextLine());
 				if(choose == 0) {
 					System.out.println("식당 삭제을 나갑니다. ");
 					return;
@@ -152,7 +153,7 @@ public class RestaurantControl {
 			
 			while(true) {
 				System.out.print("입력> ");
-				choose = ScannerStatic.mustNaturalNum(scan.nextLine());
+				choose = ScannerStatic.mustNaturalNumOr0(scan.nextLine());
 				if(choose == 0) {
 					System.out.println("식당 수정을 나갑니다. ");
 					return;
@@ -165,15 +166,15 @@ public class RestaurantControl {
 							name = LengthLimitStatic.lengthCheck(name,20);
 							
 							System.out.print("메뉴들중 낮은 가격은(최대 6자리) > ");
-							int lowPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+							int lowPrice = ScannerStatic.mustNaturalNumOrBlink(scan.nextLine());
 							lowPrice = LengthLimitStatic.lengthCheck(lowPrice,6);
 							
 							System.out.print("메뉴들중 높은 가격은(최대 6자리) > ");
-							int highPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+							int highPrice = ScannerStatic.mustNaturalNumOrBlink(scan.nextLine());
 							highPrice = LengthLimitStatic.lengthCheck(highPrice,6);
 							
 							System.out.print("학원 기준으로 이동시간은 어느정도 인가요(최재 2자리) > ");
-							int durationTime = ScannerStatic.mustNaturalNum(scan.nextLine());
+							int durationTime = ScannerStatic.mustNaturalNumOrBlink(scan.nextLine());
 							durationTime = LengthLimitStatic.lengthCheck(durationTime,2);
 							
 							if(name == null || lowPrice == -1 || highPrice == -1 || durationTime == -1) {

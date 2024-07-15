@@ -18,7 +18,7 @@ public class ReviewControl {
 	public void reviewMenu(RestaurantVO vo) {
 		while(true) {
 			reviewMenuPrint(vo.getName());
-			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
 			switch (choice) {
 			case 1:  
 				addReview(vo.getId(), vo.getName());
@@ -44,7 +44,7 @@ public class ReviewControl {
 	public void reviewMenuByManager(RestaurantVO vo) {
 		while(true) {
 			reviewByManagerMenuPrint(vo.getName());
-			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
 			switch (choice) {
 			case 1:  
 				reviewList(vo.getId(), vo.getName());
@@ -150,7 +150,7 @@ public class ReviewControl {
 			int choose;
 			while(true) {
 					System.out.print("입력> ");
-					choose = ScannerStatic.mustNaturalNum(scan.nextLine());
+					choose = ScannerStatic.mustNaturalNumOr0(scan.nextLine());
 					if(choose == 0) {
 						System.out.println("리뷰 삭제를 나갑니다. ");
 						return;
@@ -192,7 +192,7 @@ public class ReviewControl {
 			int choose;
 			while(true) {
 				System.out.print("입력> ");
-				choose = ScannerStatic.mustNaturalNum(scan.nextLine());
+				choose = ScannerStatic.mustNaturalNumOr0(scan.nextLine());
 				if(choose == 0) {
 					System.out.println("리뷰 수정을 나갑니다. ");
 					return;
@@ -205,7 +205,7 @@ public class ReviewControl {
 							name = LengthLimitStatic.lengthCheck(name,20);
 							
 							System.out.print("자신이 주고자하는 점수는 몇점인가요? (1~5) > ");
-							int point = ScannerStatic.mustNaturalNum(scan.nextLine());
+							int point = ScannerStatic.mustNaturalNumOrBlink(scan.nextLine());
 							point = LengthLimitStatic.lengthCheck(point, 1);
 
 							System.out.print("리뷰 내용 을 작성해 주십시요 (100글자 제한됩니다 ) > ");

@@ -14,6 +14,35 @@ public class ScannerStatic {
 			return -1;
 		}
 	}
+	
+	public static int mustNaturalNumOr0(String string) {
+		try {
+			int num = Integer.parseInt(string);
+			if(num >= 0) {
+				return num;
+			}else {
+				return -1;
+			}
+		}catch(Exception e){
+			return -1;
+		}
+	}
+	
+	public static int mustNaturalNumOrBlink(String string) {
+		if(string.length() < 1) {
+			return 0;
+		}
+		try {
+			int num = Integer.parseInt(string);
+			if(num > 0) {
+				return num;
+			}else {
+				return -1;
+			}
+		}catch(Exception e){
+			return -1;
+		}
+	}
 	// 올바른 값인지 확인한다.
 	// 허가된 특수 기호 : ! @ # $ % ^ & + = / _
 	public static String rightString(String string) {
