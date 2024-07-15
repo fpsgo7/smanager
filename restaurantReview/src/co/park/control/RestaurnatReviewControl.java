@@ -5,8 +5,10 @@ import java.util.Scanner;
 import co.park.dao.MemberDAO;
 import co.park.dao.RestaurantDAO;
 import co.park.dao.ReviewDAO;
+import co.park.info.MemberFileStatic;
 import co.park.info.MemberStatic;
 import co.park.info.ScannerStatic;
+import co.park.vo.MemberVO;
 
 public class RestaurnatReviewControl {
 	Scanner scan = new Scanner(System.in);
@@ -25,7 +27,7 @@ public class RestaurnatReviewControl {
 			if(MemberStatic.getId() == null) {
 				switch (choice) {
 				case 1:  
-					if(memberControl.login()) {
+					if(memberControl.loginActive()) {
 						loginSuccess(MemberStatic.getGrade());
 					}
 					break;
@@ -37,7 +39,9 @@ public class RestaurnatReviewControl {
 					break;
 				case 4:
 					// 작업전 (기본적인거 완료후 추가작업때 하자)
-					memberControl.autoLogin();
+					if(memberControl.autoLogin()) {
+						loginSuccess(MemberStatic.getGrade());
+					}
 					break;
 				case 5:
 					System.out.println("종료합니다.");
@@ -63,9 +67,12 @@ public class RestaurnatReviewControl {
 					}
 					break;
 				case 4:
-					System.out.println("자동 로그인 등록");
+					addAutoLogin();
 					break;
 				case 5:
+					removeAutoLogin();
+					return;
+				case 6:
 					System.out.println("종료합니다.");
 					return;
 				default:
@@ -73,6 +80,24 @@ public class RestaurnatReviewControl {
 				}
 			}
 		}
+	}
+	
+	private void removeAutoLogin() {
+		System.out.println("자동 로그인 등록내용을 삭제합니다.");
+		System.out.println(
+				MemberFileStatic.removeMemberFile() ? 
+						"자동 로그인 내용삭제 성공하였습니다." :
+						"자돌 로그인 네용삭제 실패하였습니다."
+				);
+	}
+
+	private void addAutoLogin() {
+		System.out.println("자동 로그인 등록합니다.");
+		System.out.println(
+				MemberFileStatic.addMemberFile() ? 
+						"자동 로그인 등록 성공하였습니다." :
+						"자돌 로그인 등록 실패하였습니다."
+				);
 	}
 	
 	private void loginSuccess(int grade) {
@@ -133,7 +158,8 @@ public class RestaurnatReviewControl {
 				System.out.println("3. 다시 식당리스트로 ");
 			}
 			System.out.println("4. 자동 로그인 등록");
-			System.out.println("5. 종료");
+			System.out.println("5. 자동 로그인 내용 제거");
+			System.out.println("6. 종료");
 			System.out.print("입력 > ");
 		}
 	}

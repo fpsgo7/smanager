@@ -39,7 +39,7 @@ public class MemberDAO extends DAO{
 	 * 아이디 유무 확인
 	 * 아이디가 있으면 true반환 없으면 false반환
 	 */
-	public boolean idCheck(String id) throws Exception{
+	public boolean idCheck(String id ) throws Exception{
 		String sql = "SELECT count(*)"
 				+ " FROM member"
 				+ " where id = ?"; 

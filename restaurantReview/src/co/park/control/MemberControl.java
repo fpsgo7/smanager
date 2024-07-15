@@ -3,6 +3,7 @@ package co.park.control;
 import java.util.Scanner;
 
 import co.park.dao.MemberDAO;
+import co.park.info.MemberFileStatic;
 import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
 import co.park.info.ScannerStatic;
@@ -75,7 +76,7 @@ public class MemberControl {
 		System.out.println("------------------------------------------------");
 		System.out.print("아이디를 입력해주십시요 > ");
 	}
-	public boolean login() {
+	public boolean loginActive() {
 		String id;
 		String password;
 		System.out.println("=================================");
@@ -87,6 +88,24 @@ public class MemberControl {
 			System.out.println("잘못된 값을 입력하셧습니다.");
 			return false;
 		}
+		return login(id,password);
+	}
+	
+	public boolean autoLogin() {
+		String str = MemberFileStatic.getString();
+		if(str == null) {
+			System.out.println("저장된 정보가 없습니다.");
+			return false;
+		}
+		String[] strArray = str.split(",");
+		String id = strArray[0];
+		String password = strArray[1];
+		
+		return login(id, password);
+		
+	}
+
+	private boolean login(String id, String password) {
 		try {
 			MemberVO vo = dao.login(id, password);
 			// 로그인 실패시
@@ -105,8 +124,4 @@ public class MemberControl {
 		}
 	}
 	
-	public boolean autoLogin() {
-		
-		return false;
-	}
 }
