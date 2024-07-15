@@ -8,10 +8,15 @@ import co.park.vo.RestaurantVO;
 public class RestaurantDAO extends DAO{
 	// 테스트용
 //	public static void main(String[] args) {
-//		RestaurantDAO dao = new RestaurantDAO();
-//		for (RestaurantVO vo : dao.getRestaurants()) {
-//			System.out.println(vo.getName());
-//		}
+////		RestaurantDAO dao = new RestaurantDAO();
+////		try {
+////			for (RestaurantVO vo : dao.getRestaurants()) {
+////				System.out.println(vo.getId()+" "+vo.getName());
+////			}
+////		} catch (Exception e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
 //		
 ////		RestaurantVO vo = new RestaurantVO();
 ////		vo.setName("1");
@@ -28,7 +33,7 @@ public class RestaurantDAO extends DAO{
 ////		vo.setDurationOfTime(1);
 ////		System.out.println(dao.updateRestaurant(vo));
 //		
-//		System.out.println(dao.deleteRestaurant(4));
+////		System.out.println(dao.deleteRestaurant(4));
 //	}
 	
 	public List<RestaurantVO> getRestaurants() throws Exception{
@@ -36,7 +41,8 @@ public class RestaurantDAO extends DAO{
 		String sql = "SELECT id, name,lowest_price, "
 				+ " highest_price,"
 				+ " duration_of_time, lastest_date"
-				+ " FROM restaurant";
+				+ " FROM restaurant "
+				+ " ORDER BY id";
 		conn = getConn();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();

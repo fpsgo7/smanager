@@ -21,7 +21,7 @@ public class RestaurnatReviewControl {
 	public void main() {
 		while(true) {
 			mainPrint();
-			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
 			if(MemberStatic.getId() == null) {
 				switch (choice) {
 				case 1:  

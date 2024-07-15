@@ -21,7 +21,7 @@ public class RestaurantControl {
 		while(true) {
 			restaurantMenuPrint();
 			System.out.print("입력 > ");
-			int choice = ScannerStatic.mustNaturalNumOr0(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
 			switch (choice) {
 			case 1:  
 				addRestaurant();

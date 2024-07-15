@@ -34,7 +34,8 @@ public class ReviewDAO extends DAO{
 				+ " place_full,"
 				+ " lastest_date"
 				+ " FROM review"
-				+ " WHERE restaurant_id = ? ";
+				+ " WHERE restaurant_id = ? "
+				+ " ORDER BY id";
 		conn = getConn();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setLong(1 , restaurantId);
@@ -64,7 +65,8 @@ public class ReviewDAO extends DAO{
 				+ " lastest_date"
 				+ " FROM review"
 				+ " WHERE restaurant_id = ? "
-				+ " AND member_id = ?";
+				+ " AND member_id = ?"
+				+ " ORDER BY id";
 		conn = getConn();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setLong(1 , restaurantId);
