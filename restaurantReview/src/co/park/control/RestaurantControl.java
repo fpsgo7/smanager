@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import co.park.dao.RestaurantDAO;
+import co.park.info.LengthLimitStatic;
 import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
 import co.park.info.ScannerStatic;
@@ -19,7 +20,7 @@ public class RestaurantControl {
 	public void restaurantMenu() {
 		while(true) {
 			restaurantMenuPrint();
-			int choice = ScannerStatic.mustInt(scan.nextLine()); 
+			int choice = ScannerStatic.mustNaturalNum(scan.nextLine()); 
 			switch (choice) {
 			case 1:  
 				addRestaurant();
@@ -59,7 +60,7 @@ public class RestaurantControl {
 				System.out.println("0 번을 눌러 되돌아가거나 식당의 번호를 입력하여 리뷰를 볼수있습니다.");
 				while(true) {
 					System.out.print("번호 입력 > ");
-					choose = ScannerStatic.mustInt(scan.nextLine()); 
+					choose = ScannerStatic.mustNaturalNum(scan.nextLine()); 
 					if(choose == 0) {
 						System.out.println("처음화면으로 돌아갑니다.");
 						return;
@@ -68,7 +69,7 @@ public class RestaurantControl {
 					if(vo == null){
 						System.out.println("잘못된 입력입니다 다시 입력해주시길 바랍니다.");
 					}else {
-						// 해당 식당의 리류로 이동
+						// 해당 식당의 리뷰로 이동
 						if(MemberStatic.getGrade() == 0 ) {
 							reviewControl.reviewMenuByManager(vo);
 						}else {
@@ -83,7 +84,7 @@ public class RestaurantControl {
 			}
 		}
 	}
-	public RestaurantVO findRestaurantId(int choose, List<RestaurantVO> list) {
+	private RestaurantVO findRestaurantId(int choose, List<RestaurantVO> list) {
 		for (RestaurantVO vo : list) {
 			if(vo.getId() == choose) {
 				return vo;
@@ -91,7 +92,7 @@ public class RestaurantControl {
 		}
 		return null;
 	}
-	public void deleteRestaurant() {
+	private void deleteRestaurant() {
 		List<RestaurantVO> list = null;
 		int choose;
 		try {
@@ -111,9 +112,9 @@ public class RestaurantControl {
 			
 			while(true) {
 				System.out.print("입력> ");
-				choose = ScannerStatic.mustInt(scan.nextLine());
+				choose = ScannerStatic.mustNaturalNum(scan.nextLine());
 				if(choose == 0) {
-					System.out.println("식당 수정을 나갑니다. ");
+					System.out.println("식당 삭제을 나갑니다. ");
 					return;
 				}
 				for (RestaurantVO vo : list) {
@@ -131,7 +132,7 @@ public class RestaurantControl {
 		}
 		
 	}
-	public void updateRestaurant() {
+	private void updateRestaurant() {
 		List<RestaurantVO> list = null;
 		int choose;
 		try {
@@ -151,7 +152,7 @@ public class RestaurantControl {
 			
 			while(true) {
 				System.out.print("입력> ");
-				choose = ScannerStatic.mustInt(scan.nextLine());
+				choose = ScannerStatic.mustNaturalNum(scan.nextLine());
 				if(choose == 0) {
 					System.out.println("식당 수정을 나갑니다. ");
 					return;
@@ -159,17 +160,27 @@ public class RestaurantControl {
 				for (RestaurantVO vo : list) {
 					if(vo.getId() == choose) {
 						while(true) {
-							System.out.print("식당이름은 무었이에요 > ");
-							String name = ScannerStatic.rightString(scan.nextLine());
-
-							System.out.print("메뉴들중 낮은 가격은 > ");
-							int lowPrice = ScannerStatic.mustInt(scan.nextLine());
-
-							System.out.print("메뉴들중 높은 가격은 > ");
-							int highPrice = ScannerStatic.mustInt(scan.nextLine());
-
-							System.out.print("학원 기준으로 이동시간은 어느정도 인가요 > ");
-							int durationTime = ScannerStatic.mustInt(scan.nextLine());
+							System.out.print("식당이름은 무었이에요(20자 제한) > ");
+							String name = ScannerStatic.rightStringWithBlink(scan.nextLine());
+							name = LengthLimitStatic.lengthCheck(name,20);
+							
+							System.out.print("메뉴들중 낮은 가격은(최대 6자리) > ");
+							int lowPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+							lowPrice = LengthLimitStatic.lengthCheck(lowPrice,6);
+							
+							System.out.print("메뉴들중 높은 가격은(최대 6자리) > ");
+							int highPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+							highPrice = LengthLimitStatic.lengthCheck(highPrice,6);
+							
+							System.out.print("학원 기준으로 이동시간은 어느정도 인가요(최재 2자리) > ");
+							int durationTime = ScannerStatic.mustNaturalNum(scan.nextLine());
+							durationTime = LengthLimitStatic.lengthCheck(durationTime,2);
+							
+							if(name == null || lowPrice == -1 || highPrice == -1 || durationTime == -1) {
+								System.out.println("잘못입력한 값이 있습니다. "
+										+ "수정작업이 실패하였습니다.\n");
+								return;
+							}
 							vo.setName(name);
 							vo.setLowestPrice(lowPrice);
 							vo.setHighestPrice(highPrice);
@@ -188,27 +199,33 @@ public class RestaurantControl {
 		}
 		
 	}
-	public void addRestaurant() {
+	private void addRestaurant() {
 		System.out.println("===============================================");
 		System.out.println("새로운 식당을 발견하셧군요 식당을 을 추가합니다");
+		System.out.println("모든 입력내용에대하여 입력해주셔야 합니다.");
 		System.out.println("-----------------------------------------------");
 		
 		RestaurantVO vo = new RestaurantVO();
-		System.out.print("식당이름은 무었이에요 > ");
-		String name = ScannerStatic.rightString(scan.nextLine());
-
-		System.out.print("메뉴들중 낮은 가격은 > ");
-		int lowPrice = ScannerStatic.mustInt(scan.nextLine());
-
-		System.out.print("메뉴들중 높은 가격은 > ");
-		int highPrice = ScannerStatic.mustInt(scan.nextLine());
-
-		System.out.print("학원 기준으로 이동시간은 어느정도 인가요 > ");
-		int durationTime = ScannerStatic.mustInt(scan.nextLine());
+		
+		System.out.print("식당이름은 무었이에요(20자 제한) > ");
+		String name = ScannerStatic.rightStringWithBlink(scan.nextLine());
+		name = LengthLimitStatic.lengthCheck(name,20);
+		
+		System.out.print("메뉴들중 낮은 가격은(최대 6자리) > ");
+		int lowPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+		lowPrice = LengthLimitStatic.lengthCheck(lowPrice,6);
+		
+		System.out.print("메뉴들중 높은 가격은(최대 6자리) > ");
+		int highPrice = ScannerStatic.mustNaturalNum(scan.nextLine());
+		highPrice = LengthLimitStatic.lengthCheck(highPrice,6);
+		
+		System.out.print("학원 기준으로 이동시간은 어느정도 인가요(최재 2자리) > ");
+		int durationTime = ScannerStatic.mustNaturalNum(scan.nextLine());
+		durationTime = LengthLimitStatic.lengthCheck(durationTime,2);
 		
 		if(name == null || lowPrice == -1 || highPrice == -1 || durationTime == -1) {
-			System.out.println("잘못입력한 값이 있습니다. +"
-					+ "추가작업이 실패하였습니다.");
+			System.out.println("잘못입력한 값이 있습니다. "
+					+ "추가작업이 실패하였습니다.\n");
 			return;
 		}
 		vo.setName(name);
@@ -236,6 +253,6 @@ public class RestaurantControl {
 		System.out.println("2. 식당 수정");
 		System.out.println("3. 식당 삭제");
 		System.out.println("4. 식당 목록");
-		System.out.println("5. 종료");
+		System.out.println("5. 메인화면으로");
 	}
 }

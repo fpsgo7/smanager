@@ -21,4 +21,9 @@ public class MemberStatic {
 	public static int getGrade() {
 		return grade;
 	}
+	public static void logout() {
+	    id = null;
+	    password = null;
+	    grade = -1;
+	}
 }

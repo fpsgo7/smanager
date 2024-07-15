@@ -15,14 +15,7 @@ public class MemberControl {
 	public void join() {
 		String id;
 		String password;
-		System.out.println("================================================");
-		System.out.println("회원 가입을 시작합니다");
-		System.out.println("해당 프로그램은 비밀번호를 암호화하지 않으며");
-		System.out.println("보안이 취약하기에 ");
-		System.out.println("실제 사용하는 비밀번호는 입력하지 마시길 바랍니다.");
-		System.out.println("회원가입을 취소하고 싶으시다면 0만 입력해주세요");
-		System.out.println("------------------------------------------------");
-		System.out.print("아이디를 입력해주십시요 > ");
+		joinPrint();
 		while(true) {
 			id = ScannerStatic.rightString(scan.nextLine());
 			if(id == null) {
@@ -69,6 +62,18 @@ public class MemberControl {
 						+ " 다시 입력해 주십시요 >");
 			}
 		}
+	}
+	private void joinPrint() {
+		System.out.println("================================================");
+		System.out.println("회원 가입을 시작합니다");
+		System.out.println("해당 프로그램은 비밀번호를 암호화하지 않으며");
+		System.out.println("보안이 취약하기에 ");
+		System.out.println("실제 사용하는 비밀번호는 입력하지 마시길 바랍니다.");
+		System.out.println("허가되는 특수기호는 다음과 같습니다");
+		System.out.println("! @ # $ % ^ & + = / _");
+		System.out.println("회원가입을 취소하고 싶으시다면 0만 입력해주세요");
+		System.out.println("------------------------------------------------");
+		System.out.print("아이디를 입력해주십시요 > ");
 	}
 	public boolean login() {
 		String id;

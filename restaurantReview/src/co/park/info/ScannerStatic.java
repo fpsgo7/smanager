@@ -2,9 +2,14 @@ package co.park.info;
 
 public class ScannerStatic {
 
-	public static int mustInt(String string) {
+	public static int mustNaturalNum(String string) {
 		try {
-			return Integer.parseInt(string);
+			int num = Integer.parseInt(string);
+			if(num > 0) {
+				return num;
+			}else {
+				return -1;
+			}
 		}catch(Exception e){
 			return -1;
 		}
@@ -17,6 +22,24 @@ public class ScannerStatic {
 		// 사용하면 안되는 대상이 있는지 확인한다.
 		for (char c : charArray) {
 			if(c == ' ' || c == '"' || c == '\'' || c == ':' || c == ';' || 
+					c == '{' || c == '[' || c == '}' || c == ']' || c == '\\' || 
+					c == '|' || c == ',' || c == '.' || c == '<' || c == '>' ||
+					c == '?' || c == '*' || c == '(' || c == ')' ||
+					c == '-' ) {
+				return null;
+			}
+		}
+		
+		return string;
+	}
+	
+	// 올바른 값인지 확인하는데서 빈 문자열도 허용한다.
+	public static String rightStringWithBlink(String string) {
+		
+		char[] charArray = string.toCharArray();
+		// 사용하면 안되는 대상이 있는지 확인한다.
+		for (char c : charArray) {
+			if(c == '"' || c == '\'' || c == ':' || c == ';' || 
 					c == '{' || c == '[' || c == '}' || c == ']' || c == '\\' || 
 					c == '|' || c == ',' || c == '.' || c == '<' || c == '>' ||
 					c == '?' || c == '*' || c == '(' || c == ')' ||
