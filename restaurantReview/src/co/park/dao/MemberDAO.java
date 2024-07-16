@@ -1,5 +1,8 @@
 package co.park.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.park.vo.MemberVO;
 
 public class MemberDAO extends DAO{
@@ -63,7 +66,7 @@ public class MemberDAO extends DAO{
 	 */
 	public boolean join(String id, String password) throws Exception{
 		String sql = "insert into member (id,password,grade)"
-				+ "values( ? , ? ,1)";
+				+ " values( ? , ? ,1)";
 		
 		conn = getConn();
 		pstmt = conn.prepareStatement(sql);
@@ -74,5 +77,52 @@ public class MemberDAO extends DAO{
 			return true;
 		}
 		return false;
+	}
+
+	public List<MemberVO> getMemberList() throws Exception{
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		String sql = "SELECT id, grade"
+				+ " FROM member";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			MemberVO vo = new MemberVO();
+			vo.setId(rs.getString("id"));
+			vo.setGrade(rs.getInt("grade"));
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	public List<MemberVO> getMemberList(String id) throws Exception{
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		String sql = "SELECT id, grade"
+				+ " FROM member"
+				+ " WHERE id LIKE ? ";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "%"+id+"%");
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			MemberVO vo = new MemberVO();
+			vo.setId(rs.getString("id"));
+			vo.setGrade(rs.getInt("grade"));
+			list.add(vo);
+		}
+		return list;
+	}
+
+	public boolean deleteMemberById(String id) throws Exception{
+		String sql = "DELETE member "
+				+" WHERE id = ?";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		if(pstmt.executeUpdate() >= 1) {
+			return true;
+		}
+		return false;
+		
 	}
 }

@@ -8,12 +8,12 @@ import co.park.dao.ReviewDAO;
 import co.park.info.MemberFileStatic;
 import co.park.info.MemberStatic;
 import co.park.info.ScannerStatic;
-import co.park.vo.MemberVO;
 
 public class RestaurnatReviewControl {
 	Scanner scan = new Scanner(System.in);
 	MemberControl memberControl = new MemberControl();
 	RestaurantControl restaurantControl = new RestaurantControl();
+	ManagerControl managerControl = new ManagerControl();
 	MemberDAO  memberDAO = new MemberDAO();
 	RestaurantDAO restaurantDAO = new RestaurantDAO();
 	ReviewDAO reviewDAO = new ReviewDAO();
@@ -103,7 +103,7 @@ public class RestaurnatReviewControl {
 	private void loginSuccess(int grade) {
 		if(grade == 0) {
 			// 관리자
-			restaurantControl.restaurantMenu();
+			managerControl.managerMenu();
 		}else {
 			restaurantControl.restaurantList();
 		}

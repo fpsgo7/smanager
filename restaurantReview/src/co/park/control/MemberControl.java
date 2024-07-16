@@ -1,8 +1,10 @@
 package co.park.control;
 
+import java.util.List;
 import java.util.Scanner;
 
 import co.park.dao.MemberDAO;
+import co.park.dao.ReviewDAO;
 import co.park.info.MemberFileStatic;
 import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
@@ -10,7 +12,8 @@ import co.park.info.ScannerStatic;
 import co.park.vo.MemberVO;
 
 public class MemberControl {
-	private MemberDAO dao = new MemberDAO();
+	private MemberDAO memberDAO = new MemberDAO();
+	private ReviewDAO reviewDAO = new ReviewDAO();
 	private Scanner scan = new Scanner(System.in);
 	
 	public void join() {
@@ -28,7 +31,7 @@ public class MemberControl {
 				return;
 			}
 			try {
-				if(dao.idCheck(id)) {
+				if(memberDAO.idCheck(id)) {
 					System.out.print("중복된 아이디 입니다 다시입력해주십시요. > ");
 					continue;
 				}
@@ -51,7 +54,7 @@ public class MemberControl {
 				return;
 			}
 			try {
-				if(dao.join(id, password)) {
+				if(memberDAO.join(id, password)) {
 					System.out.println("회원 가입이 완료되었습니다.");
 					return;
 				}
@@ -108,7 +111,7 @@ public class MemberControl {
 
 	private boolean login(String id, String password) {
 		try {
-			MemberVO vo = dao.login(id, password);
+			MemberVO vo = memberDAO.login(id, password);
 			// 로그인 실패시
 			if(vo == null) {
 				System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
@@ -123,6 +126,55 @@ public class MemberControl {
 			System.out.println("서버 오류가 발생하였습니다.");
 			return false;
 		}
+	}
+
+	public void getMemberList() {
+		List<MemberVO> list = null; 
+		try {
+			System.out.println("===================================================================");
+			System.out.println("회원 리스트 입니다.");	
+			list = memberDAO.getMemberList();
+			for (MemberVO vo : list) {
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf("%s 님의 등급 %d \n", 
+						vo.getId(), vo.getGrade());
+			}
+			System.out.println("-------------------------------------------------------------------");
+			System.out.print("엔터를 치면 이전화면으로 이동됩니다.");
+			scan.nextLine();
+		}catch (Exception e) {
+			PrintErrStatic.serverErrorPrint(e);
+			System.out.println("서버 오류로 이전화면으로 돌아가겠습니다.");
+		}
+		
+	}
+	public void searchMember() {
+		List<MemberVO> list = null; 
+		System.out.println("아이디 검색 > ");
+		String searchId = ScannerStatic.rightString(scan.nextLine());
+		try {
+			System.out.println("===================================================================");
+			System.out.println("검색된 회원 리스트 입니다.");	
+			list = memberDAO.getMemberList(searchId);
+			for (MemberVO vo : list) {
+				System.out.println("-------------------------------------------------------------------");
+				System.out.printf("%s 님의 등급 %d \n", 
+						vo.getId(), vo.getGrade());
+			}
+			System.out.println("-------------------------------------------------------------------");
+			System.out.print("삭제할 대상의 아이디를 정확히 입력해주세요 > ");
+			String id = ScannerStatic.rightString(scan.nextLine());
+
+			if(reviewDAO.deleteReviewByMember(id) && memberDAO.deleteMemberById(id)) {
+				System.out.println("회원이 성공적으로 삭제되었습니다.");
+			}else {
+				System.out.println("회원 삭제가 실패하였습니다.");
+			}
+		}catch (Exception e) {
+			PrintErrStatic.serverErrorPrint(e);
+			System.out.println("서버 오류로 이전화면으로 돌아가겠습니다.");
+		}
+		
 	}
 	
 }
