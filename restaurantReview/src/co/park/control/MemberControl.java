@@ -76,6 +76,7 @@ public class MemberControl {
 		System.out.println("------------------------------------------------");
 		System.out.print("아이디를 입력해주십시요 > ");
 	}
+	
 	public boolean loginActive() {
 		String id;
 		String password;

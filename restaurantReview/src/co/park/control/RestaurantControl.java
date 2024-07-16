@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import co.park.dao.RestaurantDAO;
+import co.park.dao.ReviewDAO;
 import co.park.info.LengthLimitStatic;
 import co.park.info.MemberStatic;
 import co.park.info.PrintErrStatic;
@@ -12,7 +13,8 @@ import co.park.vo.RestaurantVO;
 
 public class RestaurantControl {
 	private ReviewControl reviewControl = new ReviewControl();
-	private RestaurantDAO dao = new RestaurantDAO();
+	private RestaurantDAO restaurantDao = new RestaurantDAO();
+	private ReviewDAO reviewDAO = new ReviewDAO();
 	private Scanner scan = new Scanner(System.in);
 	/**
 	 * 식당 기능 메슈 (관리자 전용)
@@ -51,7 +53,7 @@ public class RestaurantControl {
 				System.out.println("===================================================================");
 				System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
 				System.out.println("-------------------------------------------------------------------");
-				list = dao.getRestaurants();
+				list = restaurantDao.getRestaurants();
 				for (RestaurantVO vo : list) {
 					System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
 							vo.getId(), vo.getName(), 
@@ -100,7 +102,7 @@ public class RestaurantControl {
 			System.out.println("===================================================================");
 			System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
 			System.out.println("-------------------------------------------------------------------");
-			list = dao.getRestaurants();
+			list = restaurantDao.getRestaurants();
 			for (RestaurantVO vo : list) {
 				System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
 						vo.getId(), vo.getName(), 
@@ -120,7 +122,8 @@ public class RestaurantControl {
 				}
 				for (RestaurantVO vo : list) {
 					if(vo.getId() == choose) {
-						dao.deleteRestaurant(choose);
+						reviewDAO.deleteReviewByRestaurant(choose);
+						restaurantDao.deleteRestaurant(choose);
 						System.out.println("식당 삭제가 완료 되었습니다.");
 						return;
 					}
@@ -140,7 +143,7 @@ public class RestaurantControl {
 			System.out.println("===================================================================");
 			System.out.println("번호 | 식당이름 | 가격대 최소 | 가격대 최대 | 이동 시간 | 최신날짜");
 			System.out.println("-------------------------------------------------------------------");
-			list = dao.getRestaurants();
+			list = restaurantDao.getRestaurants();
 			for (RestaurantVO vo : list) {
 				System.out.printf("%d. %s %d원 %d원 %d분 %s\n", 
 						vo.getId(), vo.getName(), 
@@ -186,7 +189,7 @@ public class RestaurantControl {
 							vo.setLowestPrice(lowPrice);
 							vo.setHighestPrice(highPrice);
 							vo.setDurationOfTime(durationTime);
-							dao.updateRestaurant(vo);
+							restaurantDao.updateRestaurant(vo);
 							System.out.println("식당 수정이 완료 되었습니다.");
 							return;
 						}
@@ -234,7 +237,7 @@ public class RestaurantControl {
 		vo.setHighestPrice(highPrice);
 		vo.setDurationOfTime(durationTime);
 		try {
-			if(dao.insertRestaurant(vo)) {
+			if(restaurantDao.insertRestaurant(vo)) {
 				System.out.println("추가 작업이 성공하였습니다.");
 			}else {
 				System.out.println("추가 작업이 실패하였습니다.");
@@ -248,12 +251,12 @@ public class RestaurantControl {
 	}
 	private void restaurantMenuPrint() {
 		System.out.println("===============================================");
-		System.out.println("안녕하십니까 관리자님 무었을 하시겠습니까?");
+		System.out.println("식당메뉴입니다 무었을 하시겠습니까?");
 		System.out.println("-----------------------------------------------");
 		System.out.println("1. 식당 추가");
 		System.out.println("2. 식당 수정");
 		System.out.println("3. 식당 삭제");
 		System.out.println("4. 식당 목록");
-		System.out.println("5. 메인화면으로");
+		System.out.println("5. 이전화면으로");
 	}
 }

@@ -147,4 +147,28 @@ public class ReviewDAO extends DAO{
 		}
 		return false;
 	}
+	
+	public boolean deleteReviewByRestaurant(int id) throws Exception{
+		String sql = "DELETE review "
+				+" WHERE restaurant_id = ?";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setLong(1, id);
+		if(pstmt.executeUpdate() >= 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean deleteReviewByMember(String id) throws Exception{
+		String sql = "DELETE review "
+				+" WHERE member_id = ?";
+		conn = getConn();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		if(pstmt.executeUpdate() >= 1) {
+			return true;
+		}
+		return false;
+	}
 }
