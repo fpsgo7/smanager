@@ -12,7 +12,7 @@ public class DAO {
 	ResultSet rs;
 	
 	public Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.19:1521:xe";
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String user = "jsp";// 유저아이디
 		String pass = "jsp";// 유저 비번

@@ -6,7 +6,7 @@ public class PrintErrStatic {
 	 * @param e
 	 */
 	public static void serverErrorPrint(Exception e) {
-		e.printStackTrace();
+//		e.printStackTrace();
 	}
 	
 }
