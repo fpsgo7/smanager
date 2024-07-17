@@ -2,6 +2,18 @@ package co.yedam.vo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+@Getter 
+@Setter
+@ToString
+@AllArgsConstructor// 모든 필드에 대한 
+@NoArgsConstructor// 매개 변수 선언이 없는 생성자
+//@Data// @Getter, @Setter @HashCode 등 모든 것을 대체해준다.
 public class StudentVO {
 	private String stdNo; // std_no
 	private String stdName;
@@ -9,48 +21,7 @@ public class StudentVO {
 	private String address;
 	private String birthDate; // 
 	private Date creationDate;
-
-	public String getStdNo() {
-		return stdNo;
-	}
-	public void setStdNo(String stdNo) {
-		this.stdNo = stdNo;
-	}
-	public String getStdName() {
-		return stdName;
-	}
-	public void setStdName(String stdName) {
-		this.stdName = stdName;
-	}
-	public String getStdPhone() {
-		return stdPhone;
-	}
-	public void setStdPhone(String stdPhone) {
-		this.stdPhone = stdPhone;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getBirthDate() {
-		return birthDate;
-	}
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
-	}
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	@Override
-	public String toString() {
-		return "StudentVO [stdNo=" + stdNo + ", stdName=" + stdName + ", stdPhone=" + stdPhone + ", address=" + address
-				+ ", birthDate=" + birthDate + ", creationDate=" + creationDate + "]";
-	}
+	
 	
 	public String briefShow() {
 		return stdNo + "  " + stdName + "  " + stdPhone ;

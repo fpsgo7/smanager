@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 해당 mapper은 StudentMapper 인터페이스와 대응된다  -->
+<mapper namespace="co.yedam.mapper.StudentMapper">
+  <!-- co.yedam.mapper.StudentMapper 인터페이스의 studentList 메서드의 구현체 -->
+  <!-- 반환 타입은  co.yedam.vo.StudentVO  을 사용한다. -->
+  <select id="studentList" resultType="student">
+    select * from tbl_student order by std_no
+  </select>
+  
+  <insert id="insertStudent" parameterType="student">
+  	insert into tbl_student(std_no, std_name, std_phone)
+				values(#{stdNo},#{stdName},#{stdPhone})
+  </insert>
+  
+  <update id="updateStudent" parameterType="student">
+  	UPDATE tbl_student SET
+			std_name = NVL(#{stdName},std_name),
+			std_phone = NVL(#{stdPhone},std_phone)
+			WHERE std_no = #{stdNo}
+  </update>
+  <!-- 파라미터 타입은 String 이며 매개변수 이름은 stdNo 이다. -->
+  <delete id="deleteStudent" parameterType="string">
+  	delete tbl_student 
+  		WHERE std_no = #{stdNo}
+  </delete>
+</mapper>
