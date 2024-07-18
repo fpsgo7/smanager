@@ -17,7 +17,8 @@ import com.yedam.common.DataSource;
 import com.yedam.mapper.StudentMapper;
 import com.yedam.vo.StudentVO;
 
-@WebServlet("/SampleServlet")// BoardWeb/SampleServlet
+// web.xml 에 등록하여 대신사용해도된다.
+//@WebServlet("/SampleServlet")// BoardWeb/SampleServlet
 public class SampleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
