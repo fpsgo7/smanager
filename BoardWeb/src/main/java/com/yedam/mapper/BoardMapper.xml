@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- BoardMapper.java의 인터페이스를 구현한다. -->
+<mapper namespace="com.yedam.mapper.BoardMapper">
+	<select id="selectList" resultType="com.yedam.vo.BoardVO" >
+		select board_no 
+			,title
+			,content
+			,writer
+			,view_cnt
+			,write_date
+		from tbl_board
+		order by board_no
+	</select>
+	<select id="selectBoard" parameterType="int" >
+		select board_no 
+			,title
+			,content
+			,writer
+			,view_cnt
+			,write_date
+		from tbl_board
+		where board_no = #{boardNo}
+	</select>
+	
+	<insert id = "insertBoard" parameterType = "com.yedam.vo.BoardVO">
+		insert into tbl_board (board_no, title, writer, content)
+		values(board_seq.nextval,
+				#{title},
+				#{writer},
+				#{content} )
+	</insert>
+	
+	<update id = "updateBoard" parameterType="com.yedam.vo.BoardVO">
+		update tbl_board
+		<set>
+			<if test = "title != null">
+				title = #{title} 
+			</if>
+			<if test = "content != null">
+				,content = #{content}
+			</if>
+		</set> 
+		where board_no = #{boardNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int" >
+		delete tbl_board
+		where board_no = #{boardNo}
+	</delete>
+	
+</mapper>
