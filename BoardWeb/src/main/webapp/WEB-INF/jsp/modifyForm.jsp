@@ -1,20 +1,26 @@
+<%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp" %>
-	<h3>등록화면 (boardForm.jsp))</h3>
-	<form action="addBoard.do">
+<%
+	BoardVO board = (BoardVO)request.getAttribute("boardVO");
+%>
+	<h3>수정화면(modifyForm.jsp)</h3>
+	<form action="updateBoard.do">
+	<input type="hidden" name="boardNo" value="<%=board.getBoardNo()%>" >
 		<table class ="table">
 	        <tr>
 	            <th>제목</th>
-	            <td><input class="form-control" type="text" name="title"></td>
+	            <td>
+	            	<input class="form-control" type="text" name="title"
+	            		value="<%=board.getTitle() %>">
+	            </td>
 	        </tr>
 	        <tr>
 	            <th>내용</th>
-	            <td><textarea class="form-control" name="content"></textarea></td>
-	        </tr>
-	        <tr>
-	            <th>작성자</th>
-	            <td><input class="form-control" type="text" name="writer"></td>
+	            <td>
+	            	<textarea class="form-control" name="content"><%=board.getContent() %></textarea>
+	            </td>
 	        </tr>
 	        <tr>
 	            <td colspan="2" align="center">

@@ -16,11 +16,8 @@ public class AddBoardControl implements Control {
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String writer = request.getParameter("writer");
-		System.out.println(writer);
 		String content=  request.getParameter("content");
-		System.out.println(content);
 		String title = request.getParameter("title");
-		System.out.println(title);
 		BoardVO vo = new BoardVO();
 		vo.setTitle(title);
 		vo.setWriter(writer);

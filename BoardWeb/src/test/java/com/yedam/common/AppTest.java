@@ -16,14 +16,6 @@ public class AppTest {
 		BoardMapper boardMapper 
 			= sqlSession.getMapper(BoardMapper.class);
 		// 팩토리에서 세션을 한번에 가져왔다.
-
-//		StudentMapper mapper 
-//			= sqlSession.getMapper(StudentMapper.class);
-//		mapper.studentList().forEach(
-//				student -> {
-//					System.out.println(student);
-//					System.out.println(student.toString());
-//				});
 //		boardTest(boardMapper);
 		
 		serviceTest();
@@ -31,10 +23,12 @@ public class AppTest {
 
 	private static void serviceTest() {
 		BoardService service = new BoardServiceImpl();
-//		service.boardList().forEach(board
-//				-> System.out.println(board));
-		// 위 문장을 단축한다.
-		service.boardList().forEach(System.out::println);
+		SearchDTO search = new SearchDTO();
+		
+		search.setPage(1);
+		search.setSearchCondition("T");
+		search.setKeyword("java");
+		service.boardList(search).forEach(System.out::println);
 		
 	}
 
@@ -53,31 +47,31 @@ public class AppTest {
 //		}
 		
 		
-		// board 추가
-		board.setTitle("제목");
-		board.setContent("추가 확인");
-		board.setWriter("유저");
-		
-		if(boardMapper.insertBoard(board) == 1) {
-			System.out.println("추가 성공");
-		}
-		
+//		// board 추가
+//		board.setTitle("제목");
+//		board.setContent("추가 확인");
+//		board.setWriter("유저");
+//		
+//		if(boardMapper.insertBoard(board) == 1) {
+//			System.out.println("추가 성공");
+//		}
+//		
 		boardMapper.selectList().forEach(boardVO -> {System.out.println(boardVO);});
-		
-		// board 수정
-		board.setTitle("수정");
-		board.setContent("내용 변경");
-		board.setBoardNo(12);
-		if(boardMapper.updateBoard(board) == 1) {
-			System.out.println("수정 성공");
-		}
-		
-		boardMapper.selectList().forEach(boardVO -> {System.out.println(boardVO);});
-		
-		// board 삭제
-		if(boardMapper.deleteBoard(12) == 1) {
-			System.out.println("삭제 성공");
-		}
+//		
+//		// board 수정
+//		board.setTitle("수정");
+//		board.setContent("내용 변경");
+//		board.setBoardNo(12);
+//		if(boardMapper.updateBoard(board) == 1) {
+//			System.out.println("수정 성공");
+//		}
+//		
+//		boardMapper.selectList().forEach(boardVO -> {System.out.println(boardVO);});
+//		
+//		// board 삭제
+//		if(boardMapper.deleteBoard(12) == 1) {
+//			System.out.println("삭제 성공");
+//		}
 	}
 	
 	

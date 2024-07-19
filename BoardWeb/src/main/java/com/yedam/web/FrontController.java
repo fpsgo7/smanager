@@ -15,7 +15,11 @@ import com.yedam.control.AddBoardControl;
 import com.yedam.control.Board;
 import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.DeleteBoard;
 import com.yedam.control.StudentListControl;
+import com.yedam.control.UpdateBoard;
+import com.yedam.control.ModifyBoardForm;
+import com.yedam.control.RemoveBoardForm;
 
 /**
  * FrontController 역할은 사용자의 모든 요청을 처리한다.
@@ -35,7 +39,10 @@ public class FrontController extends HttpServlet{
 		map.put("/boardForm.do", new BoardForm());
 		map.put("/addBoard.do", new AddBoardControl());
 		map.put("/board.do", new Board());
-		
+		map.put("/removeBoard.do", new RemoveBoardForm());// 삭제 페이지
+		map.put("/deleteBoard.do", new DeleteBoard());// 삭제 작업
+		map.put("/modifyBoard.do", new ModifyBoardForm());
+		map.put("/updateBoard.do", new UpdateBoard());
 		// 학생 파트
 		map.put("/stdList.do", new StudentListControl());
 	}

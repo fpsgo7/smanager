@@ -5,8 +5,8 @@
 <%
 	BoardVO board = (BoardVO)request.getAttribute("boardVO");
 %>
-	<h3>상세화면(board.do)</h3>
-	<form action="removeBoard.do">
+	<h3>삭제화면(remobeForm.jsp)</h3>
+	<form action="deleteBoard.do">
 	<input type="hidden" name="boardNo" value="<%=board.getBoardNo()%>" >
 	<table class ="table">
 	    <tr>
@@ -35,10 +35,4 @@
         </tr>
     </table>
 	</form>
-	<script>
-		document.querySelector('form>table button.btn.btn-warning')
-			.addEventListener('click', function(e){
-				location.href = 'modifyBoard.do?boardNo=<%=board.getBoardNo()%>';
-			});
-	</script>
 <%@ include file="../includes/footer.jsp" %>

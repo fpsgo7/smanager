@@ -2,6 +2,7 @@ package com.yedam.service;
 
 import java.util.List;
 
+import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
 
 /**
@@ -11,7 +12,8 @@ import com.yedam.vo.BoardVO;
  */
 public interface BoardService {
 	// Service 계층이기에 업무로직 방식의 이름을 사용한다.!!!
-	List<BoardVO> boardList();
+	List<BoardVO> boardList(SearchDTO searchDTO);
+	int totalCount(SearchDTO searchDTO);// 페이징 계산용 건수.
 	boolean addBoard(BoardVO board);
 	boolean modifyBoard(BoardVO board);
 	boolean removeBoard(int boardNo);

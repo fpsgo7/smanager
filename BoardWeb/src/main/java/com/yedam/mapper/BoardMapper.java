@@ -2,6 +2,7 @@ package com.yedam.mapper;
 
 import java.util.List;
 
+import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
 
 /**
@@ -12,7 +13,10 @@ import com.yedam.vo.BoardVO;
 public interface BoardMapper {
 	/* 조회 파트 */
 	List<BoardVO> selectList();
-	
+	// 앞으로는 전체조회는 이걸 사용한다.
+	List<BoardVO> selectListPaging(SearchDTO searchDTO);// 페이지 정보-> 5건씩 출력
+	// 페이징 계산하기 위한 전체 건수
+	int selectTotalCount(SearchDTO searchDTO);
 	BoardVO selectBoard(int boardNo);
 	
 	/* 등록 파트 */
