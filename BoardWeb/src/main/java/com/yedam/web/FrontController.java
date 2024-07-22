@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.control.ActionControl;
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.Board;
 import com.yedam.control.BoardForm;
@@ -45,6 +46,9 @@ public class FrontController extends HttpServlet{
 		map.put("/updateBoard.do", new UpdateBoard());
 		// 학생 파트
 		map.put("/stdList.do", new StudentListControl());
+		
+		
+		map.put("/action.do", new ActionControl());
 	}
 	
 	@Override
