@@ -18,7 +18,7 @@ public class Board implements Control {
 		BoardService boardService = new BoardServiceImpl();
 		BoardVO board = boardService.getBoard(Integer.parseInt(boardNo));
 		
-		request.setAttribute("boardVO", board);
+		request.setAttribute("board", board);
 		request.getRequestDispatcher("WEB-INF/jsp/board.jsp")
 		.forward(request, response);
 	}

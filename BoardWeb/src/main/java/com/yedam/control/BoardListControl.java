@@ -36,7 +36,7 @@ public class BoardListControl implements Control{
 		PageDTO pageDTO = new PageDTO(Integer.parseInt(page), totalCnt);
 		
 		request.setAttribute("paging", pageDTO);
-		request.setAttribute("searchDTO", searchDTO);
+		request.setAttribute("search", searchDTO);
 		// 해당 페이지를 뿌려준다.
 		request.getRequestDispatcher("WEB-INF/jsp/boardList.jsp")
 			.forward(request, response);

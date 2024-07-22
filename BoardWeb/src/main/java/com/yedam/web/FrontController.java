@@ -17,6 +17,8 @@ import com.yedam.control.Board;
 import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.DeleteBoard;
+import com.yedam.control.LoginControl;
+import com.yedam.control.LoginForm;
 import com.yedam.control.StudentListControl;
 import com.yedam.control.UpdateBoard;
 import com.yedam.control.ModifyBoardForm;
@@ -46,9 +48,11 @@ public class FrontController extends HttpServlet{
 		map.put("/updateBoard.do", new UpdateBoard());
 		// 학생 파트
 		map.put("/stdList.do", new StudentListControl());
-		
-		
+		// 공부 파트
 		map.put("/action.do", new ActionControl());
+		// 로그인 파트
+		map.put("/loginForm.do", new LoginForm());
+		map.put("/login.do", new LoginControl());
 	}
 	
 	@Override

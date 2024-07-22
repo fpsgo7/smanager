@@ -22,7 +22,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시글 목록</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">등록화면</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="action.do">jsp 태그연습</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="loginForm.do">로그인 화면</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
