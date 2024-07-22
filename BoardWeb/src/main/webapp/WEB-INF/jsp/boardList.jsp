@@ -40,7 +40,7 @@
 			<c:forEach var="board" items="${boardList}">
 			<tr>
 				<td>${board.boardNo}</td>
-				<td><a href="board.do?boardNo=${board.boardNo}">${board.title}</a></td>
+				<td><a href="board.do?boardNo=${board.boardNo}&page=${paging.page}&searchCondition=${search.searchCondition}&keyword=${search.keyword}">${board.title}</a></td>
 				<td>${board.writer}</td>
 				<td>${board.writeDate}</td>
 			</tr>

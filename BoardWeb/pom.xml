@@ -63,5 +63,12 @@
 	      <artifactId>taglibs-standard-impl</artifactId>
 	      <version>1.2.5</version>
 	    </dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/com.servlets/cos -->
+		<dependency>
+		    <groupId>com.servlets</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>05Nov2002</version>
+		</dependency>
 	</dependencies>
 </project>

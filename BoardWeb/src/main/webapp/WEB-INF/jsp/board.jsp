@@ -1,11 +1,13 @@
-<%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix = "c" %>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 	<h3>상세화면(board.do)</h3>
 	<form action="removeBoard.do">
 	<input type="hidden" name="boardNo" value="${board.boardNo}" >
+	<input type="hidden" name="page" value="${search.page}" >
+	<input type="hidden" name="searchCondition" value="${search.searchCondition}" >
+	<input type="hidden" name="keyword" value="${search.keyword}" >
 	<table class ="table">
 	    <tr>
             <th>글번호</th>
@@ -26,10 +28,26 @@
             <td colspan="3">${board.writer}</td>
         </tr>
         <tr>
-            <td colspan="2" align="center">
-            	<input class="btn btn-danger" type="submit" value="삭제">
-            	<button class="btn btn-warning" type="button" >수정</button>
-            </td>
+        	<th>파일</th>
+        	<td colspan="3">
+        		<img width="250px" src="images/${board.image}">
+        	</td> 
+        </tr>
+        <tr>
+        	<c:choose>
+        		<c:when test="${board.writer == logid}">
+	        		<td colspan="2" align="center">
+	            		<input class="btn btn-danger" type="submit" value="삭제">
+	            		<button class="btn btn-warning" type="button" >수정</button>
+	            	</td>
+        		</c:when>
+        		<c:otherwise>
+        			<td colspan="2" align="center">
+	            		<input class="btn btn-danger" disabled type="submit" value="삭제">
+	            		<button class="btn btn-warning" disabled type="button" >수정</button>
+	            	</td>
+        		</c:otherwise>
+        	</c:choose>
         </tr>
     </table>
 	</form>

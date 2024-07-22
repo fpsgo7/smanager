@@ -19,22 +19,8 @@
 		from (select rownum rn, a.*
 		        from (select * 
 		                from tbl_board
-		                where 
-		                <choose>
-		                	<when test="searchCondition == 'T'.toString()">
-		                		title like '%'|| #{keyword} ||'%'
-		                	</when>
-		                	<when test="searchCondition == 'W'.toString()">
-		                		writer like '%'|| #{keyword} ||'%'
-		                	</when>
-		                	<when test="searchCondition == 'TW'.toString()">
-		                		title like '%'|| #{keyword} ||'%' or writer like '%'|| #{keyword} ||'%'
-		                	</when>
-		                	<otherwise>
-		                		1 = 1
-		                	</otherwise>
-		                </choose>
-		                order by board_no) a ) b
+		                <include refid = "selectCondition"></include>
+		                order by board_no desc) a ) b
 		where b.rn > (#{page} - 1) * 5
 		<![CDATA[
 		and b.rn <=(#{page} * 5)
@@ -44,6 +30,10 @@
 	<select id="selectTotalCount" parameterType="com.yedam.common.SearchDTO">
 		select count(1)
 		from tbl_board
+		<include refid = "selectCondition"></include>
+	</select>
+	<!-- 중복되는 문장을 따로 꺼낸다. -->
+	<sql id="selectCondition">
 		where 
           <choose>
           	<when test="searchCondition == 'T'.toString()">
@@ -59,7 +49,8 @@
           		1 = 1
           	</otherwise>
           </choose>
-	</select>
+	</sql>
+	
 	<select id="selectBoard" parameterType="com.yedam.vo.BoardVO" >
 		select board_no 
 			,title
@@ -67,16 +58,18 @@
 			,writer
 			,view_cnt
 			,write_date
+			,image
 		from tbl_board
 		where board_no = #{boardNo}
 	</select>
 
 	<insert id = "insertBoard" parameterType = "com.yedam.vo.BoardVO">
-		insert into tbl_board (board_no, title, writer, content)
+		insert into tbl_board (board_no, title, writer, content, image)
 		values(board_seq.nextval,
 				#{title},
 				#{writer},
-				#{content} )
+				#{content},
+				#{image} )
 	</insert>
 	
 	<update id = "updateBoard" parameterType="com.yedam.vo.BoardVO">

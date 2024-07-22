@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -18,6 +19,12 @@ public class RemoveBoardForm implements Control {
 		BoardVO board = boardService.getBoard(Integer.parseInt(boardNo));
 		
 		request.setAttribute("boardVO", board);
+		
+		SearchDTO searchDTO = new SearchDTO();
+		searchDTO.setPage(Integer.parseInt(request.getParameter("page")));
+		searchDTO.setKeyword(request.getParameter("keyword"));
+		searchDTO.setSearchCondition(request.getParameter("searchCondition"));
+		request.setAttribute("search", searchDTO);
 		
 		request.getRequestDispatcher("WEB-INF/jsp/removeForm.jsp")
 			.forward(request, response);
