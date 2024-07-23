@@ -38,7 +38,8 @@ public class BoardListControl implements Control{
 		request.setAttribute("paging", pageDTO);
 		request.setAttribute("search", searchDTO);
 		// 해당 페이지를 뿌려준다.
-		request.getRequestDispatcher("WEB-INF/jsp/boardList.jsp")
+		//  tiles 관련 요청으로 페이지를 그린다.
+		request.getRequestDispatcher("board/boardList.tiles")
 			.forward(request, response);
 	}
 	

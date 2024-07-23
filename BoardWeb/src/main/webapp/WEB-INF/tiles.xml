@@ -16,4 +16,18 @@
   <definition name="myapp.homepage2" extends="myapp.homepage">
     <put-attribute name="body" value="/tiles/home_body2.jsp" />
   </definition>
+  
+  <definition name="myapp.user" template="/WEB-INF/layout/template.jsp">
+    <put-attribute name="title" value="일반사용자용 템플릿" />
+    <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/layout/body.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  </definition>
+  
+  <!-- board 하위의 경로로 호출되면 실행된다. WILDCARD를 활용해줘야한다.
+  * 위치에는 {1} 을 위한 값이 들어간다.  -->
+  <definition name="WILDCARD:board/*" extends="myapp.user">
+    <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+  </definition>
 </tiles-definitions>
