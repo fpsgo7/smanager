@@ -35,4 +35,19 @@
   	where member_id = #{id}
   	and member_pw = #{pw}
   </select>
+  
+  <select id="selectMembers" resultType="com.yedam.vo.MemberVO" parameterType="string">
+  	select member_id,
+  		member_pw,
+  		member_nm,
+  		responsibility
+  	from tbl_member
+  	where responsibility != 'Admin'
+  	<if test="orderBy == 'id'.toString()">
+  	order by member_id
+  	</if>
+  	<if test="orderBy == 'name'.toString()">
+  	order by member_nm
+  	</if>
+  </select>
 </mapper>
