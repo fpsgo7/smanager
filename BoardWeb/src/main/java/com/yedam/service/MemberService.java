@@ -1,5 +1,7 @@
 package com.yedam.service;
 
+import com.yedam.vo.MemberVO;
+
 public interface MemberService {
-	boolean loginCheck(String id, String pw);
+	MemberVO loginCheck(String id, String pw);
 }

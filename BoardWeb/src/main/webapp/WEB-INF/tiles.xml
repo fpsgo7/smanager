@@ -30,4 +30,16 @@
   <definition name="WILDCARD:board/*" extends="myapp.user">
     <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
   </definition>
+  
+   <definition name="myapp.admin" template="/WEB-INF/admin/template.jsp">
+    <put-attribute name="title" value="관리자용 템플릿" />
+    <put-attribute name="header" value="/WEB-INF/admin/header.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/admin/menu.jsp" />
+    <put-attribute name="body" value="/WEB-INF/admin/body.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/admin/footer.jsp" />
+  </definition>
+  
+  <definition name="WILDCARD:admin/*" extends="myapp.admin">
+    <put-attribute name="body" value="/WEB-INF/jsp/admin/{1}.jsp" />
+  </definition>
 </tiles-definitions>

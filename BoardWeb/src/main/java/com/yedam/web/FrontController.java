@@ -20,6 +20,7 @@ import com.yedam.control.DeleteBoard;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginForm;
 import com.yedam.control.LogoutControl;
+import com.yedam.control.MemberLsitContol;
 import com.yedam.control.StudentListControl;
 import com.yedam.control.UpdateBoard;
 import com.yedam.control.ModifyBoardForm;
@@ -55,6 +56,8 @@ public class FrontController extends HttpServlet{
 		map.put("/loginForm.do", new LoginForm());
 		map.put("/login.do", new LoginControl());
 		map.put("/logout.do", new LogoutControl());
+		// 관리자 파트
+		map.put("/memberList.do", new MemberLsitContol());
 	}
 	
 	@Override

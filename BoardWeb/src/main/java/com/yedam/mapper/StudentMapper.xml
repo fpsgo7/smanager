@@ -26,8 +26,11 @@
   		WHERE std_no = #{stdNo}
   </delete>
   <!-- 회원 파트 -->
-  <select id="selectMember" resultType="int">
-  	select count(1)
+  <select id="selectMember" resultType="com.yedam.vo.MemberVO">
+  	select member_id,
+  		member_pw,
+  		member_nm,
+  		responsibility
   	from tbl_member
   	where member_id = #{id}
   	and member_pw = #{pw}

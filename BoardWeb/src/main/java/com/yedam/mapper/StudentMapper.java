@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.yedam.vo.MemberVO;
 import com.yedam.vo.StudentVO;
 
 public interface StudentMapper {
@@ -15,5 +16,5 @@ public interface StudentMapper {
 	public int insertStudent(StudentVO vo);
 	
 	// 로그인 체크 (매개변수에 파라미터 대응시키기)
-	int selectMember(@Param("id") String id, @Param("pw") String pw);
+	MemberVO selectMember(@Param("id") String id, @Param("pw") String pw);
 }
