@@ -11,7 +11,7 @@ public class BoardForm implements Control {
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		// 해당 페이지를 뿌려준다.
-		request.getRequestDispatcher("WEB-INF/jsp/boardForm.jsp")
+		request.getRequestDispatcher("board/boardForm.tiles")
 			.forward(request, response);
 			
 	}

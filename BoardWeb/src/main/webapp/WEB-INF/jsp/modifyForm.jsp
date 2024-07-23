@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
 	<h3>수정화면(modifyForm.jsp)</h3>
 	<form action="updateBoard.do">
 	<input type="hidden" name="boardNo" value="${boardVO.boardNo}" >
@@ -26,4 +25,3 @@
 	        </tr>
 	    </table>
 	</form>
-<jsp:include page="../includes/footer.jsp"></jsp:include>

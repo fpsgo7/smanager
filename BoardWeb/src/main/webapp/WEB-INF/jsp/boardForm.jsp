@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
 	<h3>등록화면 (boardForm.jsp))</h3>
 	<form action="addBoard.do" method="post" enctype="multipart/form-data">
 		<table class ="table">
@@ -29,4 +28,3 @@
 	        </tr>
 	    </table>
 	</form>
-<jsp:include page="../includes/footer.jsp"></jsp:include>

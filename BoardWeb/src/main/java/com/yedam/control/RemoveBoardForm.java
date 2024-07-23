@@ -26,7 +26,7 @@ public class RemoveBoardForm implements Control {
 		searchDTO.setSearchCondition(request.getParameter("searchCondition"));
 		request.setAttribute("search", searchDTO);
 		
-		request.getRequestDispatcher("WEB-INF/jsp/removeForm.jsp")
+		request.getRequestDispatcher("board/removeForm.tiles")
 			.forward(request, response);
 
 	}

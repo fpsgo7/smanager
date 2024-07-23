@@ -19,7 +19,7 @@ public class ModifyBoardForm implements Control {
 		
 		request.setAttribute("boardVO", board);
 		
-		request.getRequestDispatcher("WEB-INF/jsp/modifyForm.jsp").forward(request, response);
+		request.getRequestDispatcher("board/modifyForm.tiles").forward(request, response);
 
 	}
 

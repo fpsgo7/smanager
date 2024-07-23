@@ -27,7 +27,7 @@ public class LoginControl implements Control {
 		}else {
 			// msg 를 "아이디와 비밀번호를 확인하세요 담기"
 			request.setAttribute("msg", "아이디와 비번을 확인하세요!");
-			request.getRequestDispatcher("WEB-INF/jsp/loginForm.jsp")
+			request.getRequestDispatcher("board/loginForm.tiles")
 			.forward(request, response);
 		}
 	}

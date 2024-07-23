@@ -28,7 +28,7 @@ public class Board implements Control {
 		searchDTO.setSearchCondition(request.getParameter("searchCondition"));
 		request.setAttribute("search", searchDTO);
 		
-		request.getRequestDispatcher("WEB-INF/jsp/board.jsp")
+		request.getRequestDispatcher("board/board.tiles")
 		.forward(request, response);
 	}
 
