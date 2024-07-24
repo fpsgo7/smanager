@@ -42,12 +42,7 @@
   		member_nm,
   		responsibility
   	from tbl_member
-  	where responsibility != 'Admin'
-  	<if test="orderBy == 'id'.toString()">
-  	order by member_id
-  	</if>
-  	<if test="orderBy == 'name'.toString()">
-  	order by member_nm
-  	</if>
+  	where responsibility = #{responsibility}
+  	order by ${orderBy}
   </select>
 </mapper>

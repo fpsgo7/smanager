@@ -18,10 +18,16 @@ public class MemberLsitContol implements Control {
 		List<MemberVO> members = new ArrayList<MemberVO>();
 		MemberService memberService = new MemberServiceImpl();
 		
-		String orderBy = request.getParameter("orderBy");
+		String orderBy = request.getParameter("orderBy") != null 
+				? request.getParameter("orderBy") : "member_id";
+		String responsibility = request.getParameter("responsibility") != null
+					? request.getParameter("responsibility") : "User";
 		
-		members = memberService.getMembers(orderBy);
+		
+		members = memberService.getMembers(orderBy,responsibility);
 		request.setAttribute("members", members);
+		request.setAttribute("orderBy", orderBy);
+		request.setAttribute("responsibility", responsibility);
 		
 		request.getRequestDispatcher("admin/memberList.tiles")
 			.forward(request, response);

@@ -7,5 +7,5 @@ import com.yedam.vo.MemberVO;
 public interface MemberService {
 	MemberVO loginCheck(String id, String pw);
 
-	List<MemberVO> getMembers(String orderBy);
+	List<MemberVO> getMembers(String orderBy, String responsibility);
 }

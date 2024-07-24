@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> getMembers(String orderBy) {
-		return mapper.selectMembers(orderBy);
+	public List<MemberVO> getMembers(String orderBy, String responsibility) {
+		return mapper.selectMembers(orderBy, responsibility);
 	}
 }
