@@ -24,6 +24,7 @@
             <td colspan="2" align="center">
                 <button id="addBtn" class="btn btn-primary">등록</button>
                 <button id="modBtn" class="btn btn-warning">수정</button>
+                <button id="delBtn" class="btn btn-danger">삭제</button>
             </td>
         </tr>
     </table>
@@ -31,11 +32,13 @@
 
 <table class="table">
     <thead>
-        <th>친구이름</th>
-        <th>주소</th>
-        <th>키</th>
-        <th>삭제</th>
-        <th><input type="checkbox" id="allCheckBox" name="all"></th>
+    	<tr>
+	    	<th>친구이름</th>
+	        <th>주소</th>
+	        <th>키</th>
+	        <th>삭제</th>
+	        <th><input type="checkbox" name="all"></th>
+    	</tr>
     </thead>
     <tbody id="list">
     </tbody>
