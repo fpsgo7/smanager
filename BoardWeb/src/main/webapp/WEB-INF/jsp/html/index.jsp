@@ -103,5 +103,5 @@
         </tr>
     </table>
 </div>
-<script src="js/json1.js"></script>
-<script src="js/json2.js"></script>
+
+<script src="js/json3.js"></script>

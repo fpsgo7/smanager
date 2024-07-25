@@ -15,6 +15,8 @@ public interface StudentMapper {
 	
 	public int insertStudent(StudentVO vo);
 	
+	public int deleteStudent(String stdNo);
+	
 	// 로그인 체크 (매개변수에 파라미터 대응시키기)
 	MemberVO selectMember(@Param("id") String id, @Param("pw") String pw);
 

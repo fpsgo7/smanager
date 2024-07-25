@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.common.Control;
 import com.yedam.control.ActionControl;
 import com.yedam.control.AddBoardControl;
+import com.yedam.control.AddStudent;
 import com.yedam.control.Board;
 import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
@@ -25,7 +26,9 @@ import com.yedam.control.StudentListControl;
 import com.yedam.control.UpdateBoard;
 import com.yedam.control.ModifyBoardForm;
 import com.yedam.control.RemoveBoardForm;
+import com.yedam.control.RemoveStudent;
 import com.yedam.control.ScriptControl;
+import com.yedam.control.StudentJson;
 
 /**
  * FrontController 역할은 사용자의 모든 요청을 처리한다.
@@ -62,6 +65,10 @@ public class FrontController extends HttpServlet{
 		
 		// 자바스크립트 연습하는 페이지 호출
 		map.put("/javascript.do", new ScriptControl());
+		// json 활용하기
+		map.put("/studentJson.do", new StudentJson());
+		map.put("/removeStudent.do", new RemoveStudent());
+		map.put("/addStudent.do", new AddStudent());
 	}
 	
 	@Override
