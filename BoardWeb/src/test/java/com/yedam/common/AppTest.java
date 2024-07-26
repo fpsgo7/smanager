@@ -42,7 +42,10 @@ public class AppTest {
 		
 		// 조회
 		List<ReplyVO> list = new ArrayList<ReplyVO>();
-		list = service.replyList(123);
+		SearchDTO dto = new SearchDTO();
+		dto.setBno(123);
+		dto.setPage(1);
+		list = service.replyList(dto);
 		list.forEach(System.out::println);
 	}
 

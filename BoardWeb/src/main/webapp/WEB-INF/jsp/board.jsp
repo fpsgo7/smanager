@@ -78,6 +78,23 @@
 		</ul>
 	</div>
 	<!-- 댓글 페이징 -->
+	<div class = "footer">
+		<nav aria-label="...">
+		  <ul class="pagination">
+		    <li class="page-item disabled">
+		      <a class="page-link">Previous</a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item active" aria-current="page">
+		      <a class="page-link" href="#">2</a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    <li class="page-item">
+		      <a class="page-link" href="#">Next</a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
 </div>
 <script>
 	// js/board.js 외부 스크립트 파일이 변수를 읽기위해 작성

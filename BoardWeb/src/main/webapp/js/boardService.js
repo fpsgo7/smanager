@@ -4,9 +4,9 @@
  */
 const svc = {
 	// 목록
-	replyList(bno=1, loadCallback){
+	replyList({bno,page}, loadCallback){
 		const xhtp = new XMLHttpRequest();
-		xhtp.open('get','replyList.do?bno='+bno);
+		xhtp.open('get',`replyList.do?bno=${bno}&page=${page}`);
 		xhtp.send();
 		// 여기서 loadCallback 매개값 매서드의 this는 xhtp이다.
 		xhtp.onload = loadCallback 
