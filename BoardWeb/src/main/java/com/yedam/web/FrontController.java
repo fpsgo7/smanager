@@ -14,7 +14,7 @@ import com.yedam.common.Control;
 import com.yedam.control.ActionControl;
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.AddStudent;
-import com.yedam.control.Board;
+import com.yedam.control.BoardControl;
 import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.DeleteBoard;
@@ -47,7 +47,7 @@ public class FrontController extends HttpServlet{
 		// 글등록 구현 : 등록 화면(boardForm.do) + DB 등록(addBoard.do) ->글 목록 페이지로 이동(boardList.do)
 		map.put("/boardForm.do", new BoardForm());
 		map.put("/addBoard.do", new AddBoardControl());
-		map.put("/board.do", new Board());
+		map.put("/board.do", new BoardControl());
 		map.put("/removeBoard.do", new RemoveBoardForm());// 삭제 페이지
 		map.put("/deleteBoard.do", new DeleteBoard());// 삭제 작업
 		map.put("/modifyBoard.do", new ModifyBoardForm());
