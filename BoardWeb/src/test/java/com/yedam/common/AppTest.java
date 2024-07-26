@@ -1,5 +1,6 @@
 package com.yedam.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
+import com.yedam.service.ReplyService;
+import com.yedam.service.ReplyServiceImpl;
 import com.yedam.vo.BoardVO;
+import com.yedam.vo.ReplyVO;
 
 public class AppTest {
 	public static void main(String[] args) {
@@ -15,10 +19,31 @@ public class AppTest {
 				DataSource.getInstance().openSession(true);
 		BoardMapper boardMapper 
 			= sqlSession.getMapper(BoardMapper.class);
-		// 팩토리에서 세션을 한번에 가져왔다.
+
 //		boardTest(boardMapper);
 		
-		serviceTest();
+//		serviceTest();
+
+		replyServiceTest();
+	}
+
+	private static void replyServiceTest() {
+		ReplyService service = new ReplyServiceImpl();
+		
+		// 등록
+		ReplyVO vo = new ReplyVO();
+		vo.setBoardNo(123);
+		vo.setReplyContent("내용");
+		vo.setReplyer("user02");
+		service.addRply(vo); // 성공
+		
+		// 삭제
+//		service.removeReply(5); // 성공
+		
+		// 조회
+		List<ReplyVO> list = new ArrayList<ReplyVO>();
+		list = service.replyList(123);
+		list.forEach(System.out::println);
 	}
 
 	private static void serviceTest() {

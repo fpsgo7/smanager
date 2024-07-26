@@ -23,7 +23,7 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="com/yedam/mapper/StudentMapper.xml"/>
-    <mapper resource="com/yedam/mapper/BoardMapper.xml"/>
+	<!-- 페키지를 통해 해당 페키지의 Mapper.xml 을 자동으로 등록할 수 있다. -->
+    <package name="com.yedam.mapper"/>
   </mappers>
 </configuration>

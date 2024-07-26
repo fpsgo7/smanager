@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- BoardMapper.java의 인터페이스를 구현한다. -->
+<mapper namespace="com.yedam.mapper.ReplyMapper">
+	
+	<select id="selectList" parameterType="int" resultType="com.yedam.vo.ReplyVO">
+		select * 
+		from tbl_reply
+		where board_no = #{boardNo}
+		order by reply_no
+	</select>
+	
+	<insert id="insertReply" parameterType="com.yedam.vo.ReplyVO" >
+		insert into tbl_reply (reply_no, reply_content, replyer, board_no)
+		values( reply_seq.nextval, 
+				#{replyContent},
+				#{replyer},
+				#{boardNo})
+	</insert>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from tbl_reply 
+		where reply_no = #{replyNo}
+	</delete>
+</mapper>
