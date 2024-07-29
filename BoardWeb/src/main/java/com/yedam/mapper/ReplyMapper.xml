@@ -22,6 +22,11 @@
 		]]>
 	</select>
 	
+	<select id = "totalReplyCnt" resultType="int">
+		select count(1) 
+		from tbl_reply
+		where board_no = #{boardNo}
+	</select>
 	<insert id="insertReply" parameterType="com.yedam.vo.ReplyVO" >
 		<selectKey keyProperty="replyNo" resultType="int" order="BEFORE">
 			select reply_seq.nextval from dual

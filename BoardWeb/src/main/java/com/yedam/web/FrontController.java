@@ -25,8 +25,9 @@ import com.yedam.control.LogoutControl;
 import com.yedam.control.MemberLsitContol;
 import com.yedam.control.StudentListControl;
 import com.yedam.control.UpdateBoard;
-import com.yedam.control.removeReplyControl;
+import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ModifyBoardForm;
+import com.yedam.control.PagingCount;
 import com.yedam.control.RemoveBoardForm;
 import com.yedam.control.RemoveStudent;
 import com.yedam.control.ReplyListControl;
@@ -58,7 +59,8 @@ public class FrontController extends HttpServlet{
 		// 댓글 파트 (글관련하여)
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/addReply.do", new AddReplyControl());
-		map.put("/removeReply.do", new removeReplyControl());
+		map.put("/removeReply.do", new RemoveReplyControl());
+		map.put("/pagingCount.do", new PagingCount());
 		// 학생 파트
 		map.put("/stdList.do", new StudentListControl());
 		// 공부 파트

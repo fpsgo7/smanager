@@ -9,4 +9,5 @@ public interface ReplyService {
 	List<ReplyVO> replyList(SearchDTO search);
 	boolean addRply(ReplyVO rvo);
 	boolean removeReply(int replyNo); // 댓글 삭제
+	int replyTotalCnt(int boardNo);
 }

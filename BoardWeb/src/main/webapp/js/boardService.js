@@ -24,7 +24,13 @@ const svc = {
 		xhtp.open('get',`removeReply.do?rno=${rno}`);
 		xhtp.send();
 		xhtp.onload = loadCallback 
+	},
+	// 댓글 개수
+	pagingCount(bno = 1, loadCallback){
+		const xhtp = new XMLHttpRequest();
+		xhtp.open('get',`pagingCount.do?bno=${bno}`);
+		xhtp.send();
+		xhtp.onload = loadCallback
 	}
-	
 } // end of svc
 // 댓글 등록 버튼에 클릭 이벤트 등록

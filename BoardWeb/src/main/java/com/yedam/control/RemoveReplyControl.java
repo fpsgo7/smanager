@@ -12,7 +12,7 @@ import com.yedam.common.Control;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 
-public class removeReplyControl implements Control {
+public class RemoveReplyControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest request, HttpServletResponse response) throws Exception {
