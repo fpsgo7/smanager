@@ -92,5 +92,19 @@
 		    <artifactId>gson</artifactId>
 		    <version>2.10.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <!-- 버전은 일부러 옜날 버전을 사용하였다(사용한 적이 있어서이다.) -->
+		    <version>5.2.8.RELEASE</version>
+		</dependency>
+		<!-- json 값을 자바 객체로 변경하기 위해 사용한다. https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <!-- 버전은 안정성을 위해 해당 버전으로한다. -->
+		    <version>2.16.1</version>
+		</dependency>
 	</dependencies>
 </project>
