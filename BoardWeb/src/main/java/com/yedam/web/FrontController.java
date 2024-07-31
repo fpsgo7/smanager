@@ -18,7 +18,9 @@ import com.yedam.control.AddStudent;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.CntByMember;
 import com.yedam.control.DeleteBoard;
+import com.yedam.control.GoogleChart;
 import com.yedam.control.ImageDownLoad;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginForm;
@@ -82,6 +84,9 @@ public class FrontController extends HttpServlet{
 		
 		// 이미지 다운로드
 		map.put("/imageDownload.do", new ImageDownLoad());
+		// 작성자별 게시글 건수.
+		map.put("/countByMember.do", new CntByMember());
+		map.put("/googleChart.do", new GoogleChart());
 	}
 	
 	@Override

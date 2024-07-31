@@ -45,4 +45,14 @@
   	where responsibility = #{responsibility}
   	order by ${orderBy}
   </select>
+  
+  <select id="selectCountByMember" resultType = "map">
+  	select b.writer as"writer" 
+	    , m.member_nm as "member_name"
+	    , count(1) as "member_cnt"
+	from tbl_board b
+	left outer join tbl_member m
+	on b.writer = m.member_id
+	group by b.writer,m.member_nm
+  </select>
 </mapper>

@@ -2,12 +2,16 @@ package com.yedam.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.mapper.BoardMapper;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
+import com.yedam.service.MemberService;
+import com.yedam.service.MemberServiceImpl;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 import com.yedam.vo.BoardVO;
@@ -24,7 +28,22 @@ public class AppTest {
 		
 //		serviceTest();
 
-		replyServiceTest();
+//		replyServiceTest();
+		
+		memberServiceTest();
+	}
+
+	private static void memberServiceTest() {
+		MemberService svc = new MemberServiceImpl();
+		List<Map<String,Object>> list = svc.getCountByMember();
+		for (Map<String, Object> map : list) {
+			System.out.println("---------------");
+			Set<String> keyset = map.keySet();
+			for(String key :  keyset) {
+				System.out.printf("%s , %s\n",key,map.get(key));
+			}
+		}
+		
 	}
 
 	private static void replyServiceTest() {

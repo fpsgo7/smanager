@@ -1,6 +1,7 @@
 package com.yedam.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -17,8 +18,13 @@ public interface StudentMapper {
 	
 	public int deleteStudent(String stdNo);
 	
+	/*맴버 관련*/
 	// 로그인 체크 (매개변수에 파라미터 대응시키기)
 	MemberVO selectMember(@Param("id") String id, @Param("pw") String pw);
 
 	public List<MemberVO> selectMembers(@Param("orderBy") String orderBY, @Param("responsibility") String responsibility);
+	
+	// 차트 (작성자별 건수)
+	List<Map<String,Object>> selectCountByMember();
+	
 }
