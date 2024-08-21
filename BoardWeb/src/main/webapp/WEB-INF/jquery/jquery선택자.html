@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Element Selection</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+</head>
+
+<body>
+    입력:<input id = "userVal"><!-- val() -->
+    <button id="addBtn">추가</button>
+    <button id="oddBtn">홀수</button>
+    <button id="evenBtn">짝수</button>
+    <button id="lt">lt(1)</button>
+    <button id="gt">gt(1)</button>
+    <button id="contains">contains(테스트용5)</button>
+    <button id="containSpan">하위요소로 span 가지고 있는 대상 찾기</button>
+    <button id="containNot">하위요소로 span 없는대상 찾기</button>
+
+    <div id="show">
+      <ul id="list">
+        <li>테스트용1</li>
+        <li><span></span>테스트용2</li>
+        <li>테스트용3</li>
+        <li>테스트용4</li>
+        <li>테스트용5</li>
+        <li>테스트용6</li>
+        <li>테스트용7</li>
+      </ul>
+    </div>
+    <script>
+
+      // 간단한 요소 추가와 요소 제거
+      let listUl = $('#list');
+      let userValInput = $('#userVal');
+      $('#addBtn').on('click',function(){
+        let li = $('<li/>').html(userValInput.val());
+        let button = $('<button id="delBtn"/>').html("삭제");
+        // 클릭 이벤트 추가
+        button.on('click',function(){
+          //li.remove();
+          $(this).parent().hide(1000);// 밀리세컨드 단위
+        })
+        li.append(button);
+        listUl.append(li);
+      });
+
+      // Jquery 선택자
+      /*
+        인덱스는 0부터 시작하기에 
+        홀수 인덱스에 적용하면 짝수 번째에 적용하는 것처럼
+        보이게된다.
+        홀수  1 3 5
+        짝수 0 2 4
+      */
+      // 홀수
+      $('#oddBtn').on('click',function(){
+        // 홀수들 에게만 스타일 지정 
+        $('#list li:even').css('background','red');
+      });
+
+      // 짝수
+      $('#evenBtn').on('click',function(){
+        // 짝수들 에게만 스타일 지정 
+        $('#list li:odd').css('background','blue');
+      });
+
+      // lt() 에 지정한 숫자 이하의 값을 지정한다.
+      $('#lt').on('click',function(){
+        $('#list li:lt(2)').css('background','black');
+      });
+
+      // gt() 에 지정한 숫자보다 더큰 대상을 지정한다.
+      $('#gt').on('click',function(){
+        $('#list li:gt(1)').css('background','green');
+      });
+
+      // 포함한 대상을 지정한다. 
+      // 여기서는 테스트용5을 가진 대상을 찾는다.
+      $('#contains').on('click',function(){
+        $('#list li:contains(테스트용5)').css('background','green');
+      });
+      // has 하위요소 찾기
+      $('#containSpan').on('click',function(){
+        $('#list li:has(span)').css('background','yellow');
+      });
+
+      // has의 반대
+      $('#containNot').on('click',function(){
+        $('#list li:not(span)').css('background','purple');
+      });
+	</script>
+</body>
+
+</html>

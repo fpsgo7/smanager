@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Element Selection</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+</head>
+<body>
+  <button id="append">append</button>
+  <button id="appendTo">appendTo</button>
+  <button id="prepend">prepend</button>
+  <button id="prependTo">prependTo</button>
+  <ul id="list">
+    <li>아이템</li>
+  </ul>
+  <li id="forAppendTo">appendTo로 추가</li>
+  <li id="forPrependTo">prependTo로 추가</li>
+  <script>
+
+    // append
+    $("#append").on('click',function(){
+      $("#list").append("<li>append로 추가</li>");
+    })
+
+    // appendTo
+    // 선택한 요소를 해당 요소의 마지막에 삽입한다.
+    $("#appendTo").on('click',function(){
+      $("#forAppendTo").appendTo('#list');
+    })
+
+    // prepend
+    $("#prepend").on('click',function(){
+      $("#list").prepend("<li>prepend로 추가</li>");
+    })
+
+    // prependTo
+    // 선택한 요소를 해당 요소의 앞에 삽입한다.
+    $("#prependTo").on('click',function(){
+      $("#forPrependTo").prependTo('#list');
+    })
+  </script>
+</body>
+</html>
