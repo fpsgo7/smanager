@@ -17,12 +17,12 @@
     <button id="gt">gt(1)</button>
     <button id="contains">contains(테스트용5)</button>
     <button id="containSpan">하위요소로 span 가지고 있는 대상 찾기</button>
-    <button id="containNot">하위요소로 span 없는대상 찾기</button>
+    <button id="containNot">하위요소로 h 클래스가 없는대상 찾기</button>
 
     <div id="show">
       <ul id="list">
         <li>테스트용1</li>
-        <li><span></span>테스트용2</li>
+        <li class="h">테스트용2</li>
         <li>테스트용3</li>
         <li>테스트용4</li>
         <li>테스트용5</li>
@@ -87,9 +87,9 @@
         $('#list li:has(span)').css('background','yellow');
       });
 
-      // has의 반대
+      // not
       $('#containNot').on('click',function(){
-        $('#list li:not(span)').css('background','purple');
+        $('li:not(.h)').css('background','purple');
       });
 	</script>
 </body>

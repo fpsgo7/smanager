@@ -54,18 +54,21 @@
       });
 
       // clone 복제하기
-      $('clone').on('click', function(){
+      $('#clone').on('click', function(){
         // 타깃 찾기
         let target = $('tbody input[type="radio"]:checked').parent().parent();
         // 타깃에서 값 구하기
-        console.log(target);
+        console.log(target.find('td:eq(1)').text());
+        let userId = target.find('td:eq(1)').text();
+        let userName = target.find('td:eq(2)').text();
+        let userAge = target.find('td:eq(3)').text();
 
         // tr 객체 만들기
         let tr = $('<tr/>');
         let td1 = $('<td/>').append($('<input/>').attr('type','radio').attr('name','choice'));
-        let td2 = $('<td/>').html($('#userId').val());
-        let td3 = $('<td/>').html($('#userName').val());
-        let td4 = $('<td/>').html($('#userAge').val());
+        let td2 = $('<td/>').html(userId);
+        let td3 = $('<td/>').html(userName);
+        let td4 = $('<td/>').html(userAge);
         tr.append(td1,td2,td3,td4);
         target.after(tr);// 선택 요소의 다음에 위치
       })
