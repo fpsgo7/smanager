@@ -34,6 +34,7 @@ public class AddReplyControl implements Control {
 				map.put("retVal", rvo);
 			}
 		}catch(Exception e) {
+			e.printStackTrace();
 			map.put("retCode", "Fail");
 			map.put("retVal", null);
 		}
