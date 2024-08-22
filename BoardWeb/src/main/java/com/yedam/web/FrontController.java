@@ -20,6 +20,7 @@ import com.yedam.control.BoardForm;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.CntByMember;
 import com.yedam.control.DeleteBoard;
+import com.yedam.control.Fullcalendar;
 import com.yedam.control.GoogleChart;
 import com.yedam.control.ImageDownLoad;
 import com.yedam.control.LoginControl;
@@ -87,6 +88,9 @@ public class FrontController extends HttpServlet{
 		// 작성자별 게시글 건수.
 		map.put("/countByMember.do", new CntByMember());
 		map.put("/googleChart.do", new GoogleChart());
+		
+		// fullcalendar 사용
+		map.put("/fullcalendar.do", new Fullcalendar());
 	}
 	
 	@Override

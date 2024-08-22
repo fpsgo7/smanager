@@ -90,4 +90,12 @@
 		where board_no = #{boardNo}
 	</delete>
 	
+	<!-- ScheduleVO 파트 -->
+	<select id="selectSchedule" resultType="com.yedam.common.ScheduleDTO">
+		select title,
+			start_date as "start",
+			end_date as "end"
+		from tbl_schedule
+	</select>
+	
 </mapper>

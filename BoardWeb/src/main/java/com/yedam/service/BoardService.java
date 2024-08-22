@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
+import com.yedam.vo.ScheduleVO;
 
 /**
  * MVC 패턴의 디자인에 따라서 mode 영역(service, dao:mapper)
@@ -18,4 +19,5 @@ public interface BoardService {
 	boolean modifyBoard(BoardVO board);
 	boolean removeBoard(int boardNo);
 	BoardVO getBoard(int boardNo);
+	List<ScheduleVO> getSchedule();
 }
