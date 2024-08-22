@@ -24,4 +24,5 @@ public interface BoardService {
 	List<ScheduleVO> getSchedule();
 	boolean addSchedule(ScheduleVO vo);
 	boolean checkSchedule(ScheduleVO scheduleVO);
+	boolean remSchedule(ScheduleVO scheduleVO);
 }

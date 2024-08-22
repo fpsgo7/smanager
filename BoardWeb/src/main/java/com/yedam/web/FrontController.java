@@ -32,6 +32,7 @@ import com.yedam.control.UpdateBoard;
 import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ModifyBoardForm;
 import com.yedam.control.PagingCount;
+import com.yedam.control.RemScheduleControl;
 import com.yedam.control.RemoveBoardForm;
 import com.yedam.control.RemoveStudent;
 import com.yedam.control.ReplyListControl;
@@ -93,6 +94,7 @@ public class FrontController extends HttpServlet{
 		// fullcalendar 사용
 		map.put("/fullcalendar.do", new Fullcalendar());
 		map.put("/addSchedule.do", new AddScheduleControl());
+		map.put("/remSchedule.do", new RemScheduleControl());
 	}
 	
 	@Override

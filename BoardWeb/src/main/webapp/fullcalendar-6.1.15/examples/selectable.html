@@ -12,7 +12,6 @@
     fetch('../../fullcalendar.do')
       .then(result => result.json()) //  문자열 -> 자바스크립트 객체
       .then(result => {
-        console.log(result);
         allEvents = result; // ajax 완료
         // calendar 그리기
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -60,8 +59,27 @@
           },
           // 일정 삭제
           eventClick: function(arg) {
+            console.log(arg.event);
+            let title  = arg.event.title;
+            let start = arg.event.startStr;
+            let end = arg.event.endStr;
+            start = arg.allDay ? start : start.substring(0,19);
+            end = arg.allDay ? end : end.substring(0,19);
             if (confirm('해당 일정을 삭제하시겠습니까?')) {
-              arg.event.remove()
+              // ajax
+              fetch('../../remSchedule.do?title='+title+'&start='+start+'&end='+end)
+              .then(result => result.json())
+              .then(result => {
+                if(result.retCode == "Success"){
+                  arg.event.remove();
+                }
+                else{
+                  alert("일정삭제가 실패하였습니다.");
+                }
+              })
+              .catch(err=> {
+                console.error(err);
+              });
             }
           },
           editable: true,

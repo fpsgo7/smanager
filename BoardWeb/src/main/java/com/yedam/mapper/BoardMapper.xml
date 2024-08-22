@@ -112,4 +112,11 @@
 		and start_date = #{start}
 		and end_date = #{end}
 	</select>
+	
+	<delete id="deleteSchedule" parameterType="com.yedam.vo.ScheduleVO">
+		delete from tbl_schedule
+		where title = #{title}
+		and start_date = #{start}
+		and end_date = #{end}
+	</delete>
 </mapper>

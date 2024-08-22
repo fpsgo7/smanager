@@ -70,6 +70,11 @@ public class BoardServiceImpl implements BoardService{
 		return false;
 	}
 
+	@Override
+	public boolean remSchedule(ScheduleVO scheduleVO) {
+		return mapper.deleteSchedule(scheduleVO) == 1;
+	}
+
 
 	
 }

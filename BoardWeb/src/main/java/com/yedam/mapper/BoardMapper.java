@@ -32,4 +32,5 @@ public interface BoardMapper {
 	List<ScheduleVO> selectScheduleList();
 	int insertSchedule(ScheduleVO vo);
 	Object selectSchedule(ScheduleVO scheduleVO);
+	int deleteSchedule(ScheduleVO scheduleVO);
 }
