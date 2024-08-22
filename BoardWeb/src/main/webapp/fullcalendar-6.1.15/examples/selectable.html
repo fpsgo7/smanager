@@ -45,6 +45,11 @@
                     end: arg.end,
                     allDay: arg.allDay
                   })
+                  alert("일정추가가 성공하였습니다.");
+                }else if(result.retCode == "Exist"){
+                  alert("중복된 일정입니다.");
+                }else{
+                  alert("일정추가가 실패하였습니다.");
                 }
               })
               .catch(err=> {

@@ -29,6 +29,7 @@ public interface BoardMapper {
 	int deleteBoard(int boardNo);
 
 	/* full Calendar 활용 */
-	List<ScheduleVO> selectSchedule();
+	List<ScheduleVO> selectScheduleList();
 	int insertSchedule(ScheduleVO vo);
+	Object selectSchedule(ScheduleVO scheduleVO);
 }

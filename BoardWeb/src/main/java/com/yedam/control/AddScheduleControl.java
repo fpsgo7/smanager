@@ -28,7 +28,11 @@ public class AddScheduleControl implements Control {
 		
 		BoardService boardService = new BoardServiceImpl();
 		Map<String, Object> map = new HashMap<>();
-		if(boardService.addSchedule(scheduleVO)) {
+		
+		if(boardService.checkSchedule(scheduleVO)) {
+			map.put("retCode", "Exist");
+		}
+		else if(boardService.addSchedule(scheduleVO)) {
 			map.put("retCode", "Success");
 		}else {
 			map.put("retCode", "Faild");

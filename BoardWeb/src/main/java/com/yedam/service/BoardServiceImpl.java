@@ -52,7 +52,7 @@ public class BoardServiceImpl implements BoardService{
 	/* Full Calendar 파트 */
 	@Override
 	public List<ScheduleVO> getSchedule() {
-		return mapper.selectSchedule();
+		return mapper.selectScheduleList();
 	}
 
 	@Override
@@ -60,5 +60,16 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return mapper.insertSchedule(vo) == 1;
 	}
+
+	@Override
+	public boolean checkSchedule(ScheduleVO scheduleVO) {
+		// TODO Auto-generated method stub
+		if(mapper.selectSchedule(scheduleVO) != null) {
+			return true;
+		}
+		return false;
+	}
+
+
 	
 }

@@ -23,4 +23,5 @@ public interface BoardService {
 	// FullCalendar 파트
 	List<ScheduleVO> getSchedule();
 	boolean addSchedule(ScheduleVO vo);
+	boolean checkSchedule(ScheduleVO scheduleVO);
 }
