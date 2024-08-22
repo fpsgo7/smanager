@@ -91,7 +91,7 @@
 	</delete>
 	
 	<!-- ScheduleVO 파트 -->
-	<select id="selectSchedule" resultType="com.yedam.common.ScheduleDTO">
+	<select id="selectSchedule" resultType="com.yedam.vo.ScheduleVO">
 		select title,
 			start_date as "start",
 			end_date as "end"
