@@ -30,8 +30,12 @@
             var title = prompt('일정을 등록하세요..');
             if (title) {
               console.log(arg);// 사용하기위한 arg 확인
+              let start = arg.startStr;
+              let end = arg.endStr;
+              start = arg.allDay ? start : start.substring(0,19);
+              end = arg.allDay ? end : end.substring(0,19);
               // ajax
-              fetch('../../addSchedule.do?title='+title+'&start='+arg.startStr+'&end='+arg.endStr)
+              fetch('../../addSchedule.do?title='+title+'&start='+start+'&end='+end)
               .then(result => result.json())
               .then(result => {
                 if(result.retCode == "Success"){
