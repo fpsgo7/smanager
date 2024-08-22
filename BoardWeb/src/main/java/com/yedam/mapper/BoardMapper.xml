@@ -98,4 +98,9 @@
 		from tbl_schedule
 	</select>
 	
+	<insert id="insertSchedule" parameterType="com.yedam.vo.ScheduleVO">
+		insert into tbl_schedule(title, start_date, end_date)
+		values(#{title},#{start},#{end})
+	</insert>
+	
 </mapper>

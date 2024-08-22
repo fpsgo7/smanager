@@ -13,8 +13,8 @@
       .then(result => result.json()) //  문자열 -> 자바스크립트 객체
       .then(result => {
         console.log(result);
-        allEvents = result;
-        // calendar 객체 생성
+        allEvents = result; // ajax 완료
+        // calendar 그리기
         var calendar = new FullCalendar.Calendar(calendarEl, {
           headerToolbar: {
             left: 'prev,next,today',
@@ -29,12 +29,23 @@
           select: function(arg) {
             var title = prompt('일정을 등록하세요..');
             if (title) {
-              calendar.addEvent({
-                title: title,
-                start: arg.start,
-                end: arg.end,
-                allDay: arg.allDay
+              console.log(arg);// 사용하기위한 arg 확인
+              // ajax
+              fetch('../../addSchedule.do?title='+title+'&start='+arg.startStr+'&end='+arg.endStr)
+              .then(result => result.json())
+              .then(result => {
+                if(result.retCode == "Success"){
+                  calendar.addEvent({
+                    title: title,
+                    start: arg.start,
+                    end: arg.end,
+                    allDay: arg.allDay
+                  })
+                }
               })
+              .catch(err=> {
+                console.error(err);
+              });
             }
             calendar.unselect()
           },

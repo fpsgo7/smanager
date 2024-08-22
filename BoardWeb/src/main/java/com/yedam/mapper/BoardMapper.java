@@ -30,4 +30,5 @@ public interface BoardMapper {
 
 	/* full Calendar 활용 */
 	List<ScheduleVO> selectSchedule();
+	int insertSchedule(ScheduleVO vo);
 }

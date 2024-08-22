@@ -28,7 +28,6 @@ public class Fullcalendar implements Control {
 		// json 문자열 방식
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(list);
-		System.out.println(json);
 		
 		response.setContentType("text/json;charset=utf-8");
 		response.getWriter().print(json);

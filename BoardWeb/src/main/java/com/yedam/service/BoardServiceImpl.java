@@ -49,10 +49,16 @@ public class BoardServiceImpl implements BoardService{
 	public BoardVO getBoard(int boardNo) {
 		return mapper.selectBoard(boardNo);
 	}
-
+	/* Full Calendar 파트 */
 	@Override
 	public List<ScheduleVO> getSchedule() {
 		return mapper.selectSchedule();
+	}
+
+	@Override
+	public boolean addSchedule(ScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertSchedule(vo) == 1;
 	}
 	
 }

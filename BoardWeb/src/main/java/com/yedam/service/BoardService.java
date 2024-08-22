@@ -19,5 +19,8 @@ public interface BoardService {
 	boolean modifyBoard(BoardVO board);
 	boolean removeBoard(int boardNo);
 	BoardVO getBoard(int boardNo);
+	
+	// FullCalendar 파트
 	List<ScheduleVO> getSchedule();
+	boolean addSchedule(ScheduleVO vo);
 }
