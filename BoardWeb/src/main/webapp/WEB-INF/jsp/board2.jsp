@@ -96,6 +96,8 @@
 			location.href = 'modifyBoard.do?boardNo=${board.boardNo}';
 		});
 </script>
-<!--<script src="js/boardService.js"></script>-->
+<!--<script src="js/boardService.js"></script>
 <script src = "js/jqueryStudy/boardJquery.js"></script>
-<script src="js/board.js" ></script>
+<script src="js/board.js" ></script>-->
+<script src="js/jBoardService.js" ></script>
+<script src="js/jBoard.js" ></script>

@@ -28,7 +28,7 @@ public class BoardControl implements Control {
 		searchDTO.setSearchCondition(request.getParameter("searchCondition"));
 		request.setAttribute("search", searchDTO);
 		
-		request.getRequestDispatcher("board/board.tiles")
+		request.getRequestDispatcher("board/board2.tiles")
 		.forward(request, response);
 	}
 

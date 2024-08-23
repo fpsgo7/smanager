@@ -25,18 +25,19 @@ public class ReplyListControl implements Control {
 				
 		SearchDTO search = new SearchDTO();
 		search.setBno(Integer.parseInt(bno));
-//		search.setPage(Integer.parseInt(page));
+		search.setPage(Integer.parseInt(page));
 		
 		ReplyService svc = new ReplyServiceImpl();
 		List<ReplyVO> list = svc.replyList(search);
 		
-		// datatable 연습
-		Map<String, Object> map = new HashedMap();
-		map.put("data", list);
+		// datatable 버전
+//		Map<String, Object> map = new HashedMap();
+//		map.put("data", list);
 		
 		// json 문자열 방식
 		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(map);
+		String json = gson.toJson(list);
+		//String json = gson.toJson(map);
 		response.setContentType("text/json;charset=utf-8");
 		
 		response.getWriter().print(json);
