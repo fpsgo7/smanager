@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,9 +165,12 @@ for (i = 0; i < close.length; i++) {
 }
 
 // Add a "checked" symbol when clicking on a list item
+// 상위 요소에 이벤트를 달아주어, 
+// 새로 추가된 하위요소라도 이벤트가 적용된다.
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
+    // checked 가 없으면 추가하고 있으면 제거한다.
     ev.target.classList.toggle('checked');
   }
 }, false);
