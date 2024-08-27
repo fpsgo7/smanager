@@ -27,4 +27,7 @@ public interface StudentMapper {
 	// 차트 (작성자별 건수)
 	List<Map<String,Object>> selectCountByMember();
 	
+	// 회원 탈퇴
+	String deleteMemberProc(Map<String, String> map);
+	
 }

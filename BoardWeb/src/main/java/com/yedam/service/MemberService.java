@@ -15,6 +15,9 @@ public interface MemberService {
 	// 차트(작성자별 건수)
 	List<Map<String,Object>> getCountByMember();
 	
+	// 회원 탈퇴
+	String signOutProc(Map<String,String> map);
+	
 	/*학생 파트*/
 	// 학생목록 조회
 	List<StudentVO> studentList();

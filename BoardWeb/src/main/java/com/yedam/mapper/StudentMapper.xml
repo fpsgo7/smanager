@@ -55,4 +55,14 @@
 	on b.writer = m.member_id
 	group by b.writer,m.member_nm
   </select>
+  
+  <select id="deleteMemberProc" statementType="CALLABLE" 
+  		parameterType="hashMap">
+  	{
+  		call sign_out_proc( #{memberId, mode=IN, jdbcType = VARCHAR},
+  							#{retCode, mode=OUT, jdbcType = VARCHAR},
+  							#{retMsg, mode=OUT, jdbcType = VARCHAR}
+  		)
+  	}
+  </select>
 </mapper>

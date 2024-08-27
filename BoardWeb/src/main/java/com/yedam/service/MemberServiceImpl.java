@@ -31,6 +31,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mapper.selectCountByMember();
 	}
+	// 회원 탈퇴
+	@Override
+	public String signOutProc(Map<String, String> map) {
+		return mapper.deleteMemberProc(map);
+	}
+
 	
 	/*학생 파트*/
 	@Override
@@ -48,6 +54,7 @@ public class MemberServiceImpl implements MemberService{
 	public boolean addStudent(StudentVO svo) {
 		return mapper.insertStudent(svo) == 1;
 	}
+
 
 
 
